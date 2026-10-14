@@ -6,7 +6,7 @@
 export type Slot = { src?: string; alt: string; cutout?: boolean };
 
 export const images: Record<string, Slot> = {
-  "IMG-01": { alt: "Prowesstics leadership team in a boardroom at dusk" },
+  "IMG-01": { src: "/images/IMG-01.jpg", alt: "Prowesstics leadership team in a boardroom at dusk" },
   "IMG-02": { alt: "Data engineering hardware", cutout: true },
   "IMG-03": { alt: "Business intelligence dashboard on a laptop", cutout: true },
   "IMG-04": { alt: "Cloud rack server", cutout: true },

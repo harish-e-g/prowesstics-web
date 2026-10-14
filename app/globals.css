@@ -334,3 +334,9 @@ html,body{margin:0}
 .ind-uses{display:flex;flex-wrap:wrap;gap:6px}
 .ind-uses span{font-size:.75rem;font-weight:700;padding:5px 10px;border-radius:999px;background:#EAF6FD;color:#1468A8}
 .ind-body .tlink{font-size:.9rem;margin-top:4px}
+
+/* Hero photo: show the whole scene, keep the headline side dark */
+.hero-bg.filled{inset:0;border:0}
+.hero-bg.filled img{object-position:72% 40%}
+.hero-bg.filled::after{background:linear-gradient(90deg,#061330 0%,rgba(6,19,48,.92) 30%,rgba(6,19,48,.45) 55%,rgba(6,19,48,.25) 100%),linear-gradient(0deg,rgba(6,19,48,.85) 0%,rgba(6,19,48,0) 35%)}
+@media (max-width:960px){.hero-bg.filled{inset:0}.hero-bg.filled::after{background:linear-gradient(180deg,rgba(6,19,48,.94) 0%,rgba(6,19,48,.8) 55%,rgba(6,19,48,.55) 100%)}}
