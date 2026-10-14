@@ -2,11 +2,36 @@
   "name": "prowesstics-web",
   "version": "1.0.0",
   "private": true,
+  "description": "Official corporate website of Prowesstics IT Services Pvt. Ltd.: data engineering, AI, computer vision and factory automation. Built with Next.js 15, React 19 and TypeScript.",
+  "keywords": [
+    "prowesstics",
+    "corporate-website",
+    "nextjs",
+    "react",
+    "typescript",
+    "data-engineering",
+    "computer-vision",
+    "factory-automation",
+    "provision-ai",
+    "prochurn-ai",
+    "deo-suite"
+  ],
+  "homepage": "https://www.prowesstics.com",
+  "author": {
+    "name": "Prowesstics IT Services Pvt. Ltd.",
+    "email": "sales@prowesstics.com",
+    "url": "https://www.prowesstics.com"
+  },
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preview:static": "STATIC_EXPORT=1 next build"
   },
   "dependencies": {
     "@fontsource-variable/nunito-sans": "5.2.7",

@@ -1,86 +1,302 @@
-# Prowesstics Website (Next.js)
+<p align="center">
+  <img src="public/brand/wordmark.png" alt="Prowesstics" width="360">
+</p>
 
-Production-ready homepage built with Next.js 15, React 19 and TypeScript. Every image position shows a labelled placeholder (IMG-01 to IMG-16 and IND-01 to IND-09) until you add the real file. The ChatGPT prompts for each slot are in IMAGE_PROMPTS.md.
+<h3 align="center">Trusted Data. Working AI. Real Business Impact.</h3>
+
+<p align="center">
+  Official corporate website of <strong>Prowesstics IT Services Pvt. Ltd.</strong><br>
+  Data engineering, AI and advanced analytics, computer vision and full factory automation for enterprises across India, Europe and the United States.
+</p>
+
+<p align="center">
+  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-15.5.27-000000?logo=nextdotjs">
+  <img alt="React" src="https://img.shields.io/badge/React-19.2.8-149ECA?logo=react">
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9.3-3178C6?logo=typescript&logoColor=white">
+  <img alt="Node" src="https://img.shields.io/badge/Node-%3E%3D20.9-5FA04E?logo=nodedotjs&logoColor=white">
+  <img alt="Licence" src="https://img.shields.io/badge/licence-proprietary-0A1F44">
+  <img alt="Vulnerabilities" src="https://img.shields.io/badge/npm%20audit-0%20vulnerabilities-2EC5DC">
+</p>
 
 ---
 
-## Step 1 · Install Node.js (one time)
-1. Go to https://nodejs.org and download the **LTS** version for Mac.
-2. Open the downloaded file and click through the installer.
-3. Open the **Terminal** app and check it worked:
-   ```
-   node -v
-   ```
-   You should see a version number such as `v22.x`.
+## Contents
 
-## Step 2 · Open the project in Terminal
-1. Unzip `prowesstics-web.zip` (double-click it).
-2. In Terminal, type `cd ` (with a space), drag the unzipped `prowesstics-web` folder into the Terminal window, and press Enter.
+1. [About the project](#1-about-the-project)
+2. [What the homepage contains](#2-what-the-homepage-contains)
+3. [Technology stack](#3-technology-stack)
+4. [Project structure](#4-project-structure)
+5. [Getting started](#5-getting-started)
+6. [Editing content](#6-editing-content)
+7. [Images and media](#7-images-and-media)
+8. [Design system](#8-design-system)
+9. [SEO and structured data](#9-seo-and-structured-data)
+10. [Accessibility and performance](#10-accessibility-and-performance)
+11. [Deployment](#11-deployment)
+12. [Contact form and lead capture](#12-contact-form-and-lead-capture)
+13. [Scripts reference](#13-scripts-reference)
+14. [Quality checklist before every release](#14-quality-checklist-before-every-release)
+15. [Roadmap](#15-roadmap)
+16. [Ownership, licence and contact](#16-ownership-licence-and-contact)
 
-## Step 3 · Install and run
+---
+
+## 1. About the project
+
+| Item | Detail |
+|---|---|
+| Organisation | Prowesstics IT Services Pvt. Ltd. |
+| Founded | 2017 |
+| Locations | Plano (USA) and Chennai (India) delivery centre |
+| Website | https://www.prowesstics.com |
+| Sales contact | sales@prowesstics.com |
+| Primary audience | Enterprise decision makers: CXOs, plant heads, heads of data, IT and operations leaders |
+| Business goal | Generate qualified inbound enquiries for data, AI, vision and automation engagements |
+| Project owner | Harish E G, Head of Sales and Marketing (APAC and EMEA) |
+| Build | Next.js App Router, static by default, deployable to Vercel |
+
+The site positions Prowesstics as one partner across three capability layers:
+
+- **Data:** data engineering, cloud migration, data warehousing and data quality
+- **Intelligence:** AI, machine learning, generative and agentic AI, predictive analytics and BI
+- **Action:** computer vision, traceability, poka-yoke and full factory automation
+
+## 2. What the homepage contains
+
+Sections render in this order (see `app/page.tsx`):
+
+| # | Section | Component | Purpose |
+|---|---|---|---|
+| 1 | Navigation | `components/Nav.tsx` | Wordmark, section links, search, Contact Us |
+| 2 | Hero | `components/Hero.tsx` | Headline, value statement, 3D "10 years" badge, animated data wave, company film button |
+| 3 | Track record bar | `components/Hero.tsx` | 10+ years, 370+ projects, 60+ certified experts, 5+ PB processed, 95% satisfaction |
+| 4 | Services | `components/Sections.tsx` (`Services`) | Eight service cards with outcome metric and technology tags |
+| 5 | Industries | `components/Sections.tsx` (`Industries`) | Nine industries in a 3 x 3 grid with use-case tags |
+| 6 | Commitments | `components/Sections.tsx` (`Commitments`) | Six client commitments: 2-week pilot, no rip-and-replace and more |
+| 7 | Solutions | `components/Sections.tsx` (`Solutions`) | ProVision AI, ProChurn AI, DEO Suite, ProSight AI, ProTrace AI |
+| 8 | Engagement model | `components/Sections.tsx` (`Engage`) | Assess, Pilot, Scale, Run |
+| 9 | Clients | `components/Sections.tsx` (`Clients`) | Scrolling client logo marquee |
+| 10 | Results | `components/Sections.tsx` (`Results`) | Eight before-and-after outcomes |
+| 11 | Technology | `components/Sections.tsx` (`TechStack`) | Two-row scrolling marquee of 27 platform logos |
+| 12 | Testimonials | `components/Testimonials.tsx` | Ten client quotes in a swipeable carousel |
+| 13 | Contact | `components/Contact.tsx` | Consultation form, sales email with copy button |
+| 14 | Footer | `components/Footer.tsx` | Sitemap columns, legal line, locations |
+
+## 3. Technology stack
+
+| Layer | Choice | Version |
+|---|---|---|
+| Framework | Next.js (App Router) | 15.5.27 |
+| UI library | React and React DOM | 19.2.8 |
+| Language | TypeScript (strict mode) | 5.9.3 |
+| Styling | Hand-written CSS with design tokens (`app/globals.css`) | n/a |
+| Font | Nunito Sans variable, self-hosted via `@fontsource-variable/nunito-sans`; Avenir used first where installed | 5.2.7 |
+| Images | `next/image` with AVIF and WebP output up to 3840 px | built in |
+| Runtime | Node.js | 20.9 or newer (22 recommended, see `.nvmrc`) |
+| Hosting | Vercel (recommended) | n/a |
+| Security | `postcss` pinned to 8.5.28 through `overrides`; `npm audit` reports 0 vulnerabilities | n/a |
+
+No UI framework, CSS framework or tracking script is bundled. The first load of the homepage is about 113 kB of JavaScript.
+
+## 4. Project structure
+
 ```
+prowesstics-web/
+├── app/
+│   ├── layout.tsx          Root layout: font, metadata, Open Graph, viewport
+│   ├── page.tsx            Homepage section order and Organization structured data
+│   ├── globals.css         Design tokens and all component styles
+│   ├── icon.png            Favicon (Prowesstics mark)
+│   ├── robots.ts           Generates /robots.txt
+│   └── sitemap.ts          Generates /sitemap.xml
+├── components/
+│   ├── Nav.tsx             Sticky navigation
+│   ├── Hero.tsx            Hero, stats bar
+│   ├── TenBadge.tsx        3D "10 years" SVG badge
+│   ├── WaveCanvas.tsx      Animated particle wave (client component)
+│   ├── FilmButton.tsx      Company film modal (client component)
+│   ├── Sections.tsx        Services, Industries, Commitments, Solutions, Engage, Clients, Results, TechStack
+│   ├── Testimonials.tsx    Testimonial carousel (client component)
+│   ├── Contact.tsx         Contact form (client component)
+│   ├── Footer.tsx          Footer
+│   ├── ImageSlot.tsx       Renders an image or a labelled placeholder
+│   └── icons.tsx           All inline SVG icons
+├── content/
+│   ├── site.ts             All copy and data: hero, stats, services, industries, products, clients, results, tech stack, testimonials
+│   └── images.ts           Image slot register (IMG-01 to IMG-16, IND-01 to IND-09) and company film path
+├── public/
+│   ├── brand/              Prowesstics wordmark and mark
+│   ├── logos/              Client logos (transparent PNG)
+│   ├── tech/               Technology logos (transparent PNG)
+│   └── images/             Website photography and technical visuals
+├── IMAGE_PROMPTS.md        Prompts used to generate every image slot
+├── CHANGELOG.md            Release history
+├── CONTRIBUTING.md         Branching, commit and review rules
+├── SECURITY.md             How to report a vulnerability
+├── LICENSE                 Proprietary licence
+└── .github/                Issue templates, pull request template, repository settings
+```
+
+## 5. Getting started
+
+### 5.1 Install Node.js (one time)
+1. Download the **LTS** installer from https://nodejs.org and run it.
+2. Check it in Terminal: `node -v` should print `v20.9` or newer.
+
+### 5.2 Clone and run
+```bash
+git clone https://github.com/<your-github-username>/prowesstics-web.git
+cd prowesstics-web
 npm install
 npm run dev
 ```
-Open http://localhost:3000 in your browser. The site reloads automatically whenever you save a file.
-Press `Ctrl + C` in Terminal to stop it.
+Open http://localhost:3000. The page reloads automatically when a file is saved. Stop the server with `Ctrl + C`.
 
----
+### 5.3 Production check
+```bash
+npm run build
+npm start
+```
 
-## Step 4 · Add your images
-1. Save each image into `public/images/` using its slot name, for example `public/images/IMG-01.jpg`.
-2. Open `content/images.ts` and add the path to that slot:
-   ```ts
-   "IMG-01": { src: "/images/IMG-01.jpg", alt: "Prowesstics leadership team in a boardroom at dusk" },
-   ```
-3. Save. The placeholder is replaced instantly.
+## 6. Editing content
 
-| Slot | Where it appears | Format |
+Every word, number and list on the homepage lives in **`content/site.ts`**. Change the text between the quotes and save.
+
+| To change | Edit in `content/site.ts` |
+|---|---|
+| Hero headline, subline, badge | `hero` |
+| Track record numbers | `stats` |
+| Industries (name, line, use cases) | `industries` |
+| Service cards (body, bullets, outcome, tech tags) | `services` |
+| Client commitments | `commitments` |
+| Product cards and KPIs | `products` |
+| Engagement steps | `steps` |
+| Client logos | `clients` (add the PNG to `public/logos/` first) |
+| Before-and-after results | `results` |
+| Technology marquee | `techRow1`, `techRow2` (add the PNG to `public/tech/` first) |
+| Testimonials | `testimonials` |
+| Contact form interests | `interests` |
+| Footer links | `footerCols` |
+
+House style for all copy: no em dashes, no references to Singapore, outcome-led sentences, numbers backed by a client result or collateral.
+
+## 7. Images and media
+
+### 7.1 Image slot register
+Every image position has a slot ID. `components/ImageSlot.tsx` shows the real image when `src` is set in `content/images.ts`, otherwise a labelled placeholder.
+
+| Slot | Position | Format | Delivered size |
+|---|---|---|---|
+| IMG-01 | Hero background | JPG | 3344 x 1882 |
+| IMG-02 to IMG-09 | Service card visuals | Transparent PNG | up to 800 px |
+| IMG-10 to IMG-14 | Product cards | JPG | 2400 px wide |
+| IMG-15 | Contact section | JPG | 2400 px wide |
+| IMG-16 | Optional photographic "10" badge | Transparent PNG | 2400 x 2400 |
+| IND-01 to IND-09 | Industries grid | JPG | 2400 x 1340 |
+
+### 7.2 Adding or replacing an image
+1. Save the file in `public/images/` using the slot name, for example `IND-05.jpg`.
+2. In `content/images.ts`, set `src` for that slot, for example `src: "/images/IND-05.jpg"`.
+3. Run `npm run dev` and check the image at desktop and phone width.
+
+### 7.3 Image standards
+- Photorealistic, true-to-life colour, no visible AI artefacts (extra objects, warped hands, blurred faces).
+- Technical visuals must show what the platform does: detection boxes with confidence, wireframes, measurements, heat maps, pipeline flows and live readouts. Overlay text is drawn in code so every label stays exact.
+- Every illustrative data overlay carries the note "Illustrative visualisation".
+- Prompts for each slot are recorded in `IMAGE_PROMPTS.md`.
+
+### 7.4 Company film
+Place the video in `public/video/` and set `companyFilm` in `content/images.ts`, for example `"/video/company-film.mp4"`.
+
+## 8. Design system
+
+| Token | Value | Use |
 |---|---|---|
-| IMG-01 | Hero background (right half) | JPG, 3840 x 2160 |
-| IMG-02 to IMG-09 | Service cards (bottom right) | Transparent PNG, 2048 x 2048 |
-| IMG-10 to IMG-14 | Product cards | JPG, 3840 x 2160 or 3000 x 2000 |
-| IMG-15 | Contact section | JPG, 3840 x 1680 |
-| IND-01 to IND-09 | Industries grid (3 x 3) | JPG, 3200 x 2000 |
-| IMG-16 | Optional photographic "10" badge (the coded 3D badge shows by default) | Transparent PNG, 2400 x 2400 |
+| `--night` | `#061330` | Hero, dark bands, footer |
+| `--navy` | `#0A1F44` | Primary brand navy |
+| `--cyan` | `#2EC5DC` | Signal colour: links, buttons, data highlights |
+| `--cyan-2` | `#1A9FD8` | Secondary cyan on light backgrounds |
+| `--gold` | `#E8B452` | Highlights, rules, accents |
+| `--ink` | `#0B1B3A` | Body text on light backgrounds |
+| `--muted` | `#5A6B85` | Secondary text |
+| `--mist` | `#F4F8FC` | Light section background |
 
-Next.js automatically converts and resizes images for each screen, so 4K originals stay fast to load.
+- Typeface: Avenir Next or Avenir where available, then Nunito Sans.
+- Layout: 1240 px maximum width, 24 px side gutter that respects device safe areas.
+- Breakpoints: 1100, 1000, 960, 900, 640, 560 and 480 px. No horizontal scrolling at 390 px.
+- Motion: marquees and the hero wave stop when the visitor has reduced motion enabled.
 
-**Company film:** put the video in `public/video/` (create the folder), then in `content/images.ts` set:
-```ts
-export const companyFilm = "/video/company-film.mp4";
-```
+## 9. SEO and structured data
 
-## Step 5 · Change text, numbers, logos or testimonials
-Everything is in **`content/site.ts`**: hero copy, stats, industries, services, products, results, client logos, tech stack and testimonials. Edit the words between the quotes and save.
+- Title, description, keywords, canonical URL, Open Graph and Twitter card in `app/layout.tsx`.
+- `Organization` and `SoftwareApplication` (one per product) JSON-LD in `app/page.tsx`.
+- `/sitemap.xml` and `/robots.txt` generated by `app/sitemap.ts` and `app/robots.ts`.
+- Every image has descriptive `alt` text in `content/images.ts`.
+- After go-live: verify the domain in Google Search Console and submit `https://www.prowesstics.com/sitemap.xml`.
 
-- **New client logo:** add the transparent PNG to `public/logos/`, then add a line to `clients`.
-- **New tech logo:** add the PNG to `public/tech/`, then replace that entry's `mono` and `color` with `logo: "/tech/yourfile.png"`. Power BI, Microsoft Fabric, AWS Glue, Informatica, Pentaho, Yellowfin, Honeywell and Rockwell currently use coloured badges until official PNGs are added.
+## 10. Accessibility and performance
 
-## Step 6 · Put it live (recommended: Vercel, free to start)
-1. Create a free account at https://github.com and upload this folder as a new repository (GitHub Desktop makes this point-and-click).
-2. Go to https://vercel.com, sign in with GitHub, click **Add New > Project**, pick the repository and click **Deploy**.
-3. In Vercel, open **Settings > Domains** and add `prowesstics.com`. Vercel shows the DNS records to add at your domain registrar.
-4. Every future change you push to GitHub goes live automatically.
+- Semantic landmarks (`header`, `main`, `section`, `footer`), labelled form controls, visible keyboard focus.
+- Carousel controls and the video dialog are keyboard operable; the dialog closes with Escape.
+- Images are served as AVIF or WebP at the size each screen needs.
+- The font is self-hosted, so no third-party font request is made.
 
-## Step 7 · Receive form leads
-The contact form validates and shows a confirmation, but does not send anywhere yet. Choose one:
-- **Easiest:** a form service such as Formspree or Basin. Paste their endpoint into `components/Contact.tsx` inside `handleSubmit`.
-- **CRM:** HubSpot or Zoho forms API, called from `handleSubmit`.
-- **Own email:** add a Next.js route handler at `app/api/contact/route.ts` that sends via Resend or SMTP.
+## 11. Deployment
 
-## Step 8 · SEO checklist after go-live
-- Add the site to **Google Search Console** and submit `https://www.prowesstics.com/sitemap.xml` (generated automatically).
-- `robots.txt`, page titles, descriptions, Open Graph tags and Organization structured data are already in place (`app/layout.tsx`, `app/page.tsx`).
+### 11.1 Vercel (recommended)
+1. Sign in at https://vercel.com with GitHub.
+2. **Add New > Project**, import `prowesstics-web`, keep the detected Next.js settings, click **Deploy**.
+3. **Settings > Domains**: add `prowesstics.com` and `www.prowesstics.com`, then add the DNS records Vercel shows at the domain registrar.
+4. Every push to `main` deploys to production. Every pull request gets its own preview URL.
 
----
+### 11.2 Static copy
+`npm run preview:static` writes a plain static copy to `out/`. It is used for quick previews and for hosts that serve static files only. Image optimisation is switched off in this mode.
 
-## Project map
-```
-app/            layout (fonts, SEO), page (section order), sitemap, robots, favicon
-components/     one file per section (Hero, Sections, Testimonials, Contact, Footer)
-content/        site.ts (all copy and data), images.ts (image slots)
-public/         brand/, logos/ (clients), tech/ (stack), images/ (your photos)
-```
+## 12. Contact form and lead capture
 
-Commands: `npm run dev` (preview) · `npm run build` (production check) · `npm start` (run the production build).
+The form in `components/Contact.tsx` validates name and work email and confirms on the page. It does not send data anywhere yet. Connect one of:
+
+| Option | How |
+|---|---|
+| Form service (fastest) | Formspree or Basin: post the form data to their endpoint inside `handleSubmit` |
+| CRM | HubSpot or Zoho forms API called from `handleSubmit` |
+| Own email | Add `app/api/contact/route.ts` and send through Resend or SMTP; keep keys in Vercel environment variables, never in the code |
+
+## 13. Scripts reference
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Local development server on port 3000 |
+| `npm run build` | Production build with type checking |
+| `npm start` | Serves the production build |
+| `npm run lint` | Next.js lint checks |
+| `npm run preview:static` | Static export to `out/` |
+
+## 14. Quality checklist before every release
+
+- [ ] `npm run build` passes with no errors
+- [ ] `npm audit` reports 0 vulnerabilities
+- [ ] Page checked at 1440 px, 768 px and 390 px with no horizontal scroll
+- [ ] No console errors in the browser
+- [ ] All images load; no placeholders left unintentionally
+- [ ] No em dashes and no Singapore references in copy
+- [ ] Every new number traceable to a client result or collateral
+- [ ] `CHANGELOG.md` updated
+
+## 15. Roadmap
+
+- Technical, data-driven visuals for every image slot (detections, wireframes, heat maps, pipelines)
+- Product detail pages for ProVision AI, ProChurn AI, DEO Suite, ProSight AI and ProTrace AI
+- Industry pages and case study library
+- Insights and blog section managed through a CMS
+- Contact form connected to the CRM
+- Analytics and Search Console set up
+
+## 16. Ownership, licence and contact
+
+Copyright © 2026 Prowesstics IT Services Pvt. Ltd. All rights reserved. This repository is proprietary; see [LICENSE](LICENSE).
+
+Client names, logos and testimonials appear with reference to delivered engagements. Third-party technology logos belong to their respective owners and are shown to indicate platform experience only.
+
+- Sales: sales@prowesstics.com
+- Website: https://www.prowesstics.com
