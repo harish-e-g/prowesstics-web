@@ -22,10 +22,10 @@ export const nav = [
 
 export const hero = {
   kicker: ["DATA", "ANALYTICS", "AI", "CLOUD", "AUTOMATION"],
-  title: "Your Data. Your Plant.",
+  title: "Trusted Data. Working AI.",
   highlight: "Real Business Impact.",
   lede:
-    "We help enterprises fix the numbers they don't trust, catch defects before customers do and keep the customers they are about to lose, on the systems and cameras they already own.",
+    "We help enterprises trust their numbers, predict what happens next and automate the work in between, on the systems they already run.",
   badgeNumber: "10",
   badgeText: ["Years of", "building trusted", "data solutions"],
   sideTop: ["PEOPLE", "INSIGHTS", "TECHNOLOGY", "IMPACT"],
