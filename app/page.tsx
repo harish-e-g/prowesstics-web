@@ -4,6 +4,7 @@ import { Services, Industries, Commitments, Solutions, Engage, Clients, Results,
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Lightbox from "@/components/Lightbox";
 import { site, products } from "@/content/site";
 
 // Structured data helps Google show the company, products and reviews correctly.
@@ -51,6 +52,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <Lightbox />
     </>
   );
 }

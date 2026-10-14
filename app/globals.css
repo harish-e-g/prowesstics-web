@@ -340,3 +340,25 @@ html,body{margin:0}
 .hero-bg.filled img{object-position:72% 40%}
 .hero-bg.filled::after{background:linear-gradient(90deg,#061330 0%,rgba(6,19,48,.92) 30%,rgba(6,19,48,.45) 55%,rgba(6,19,48,.25) 100%),linear-gradient(0deg,rgba(6,19,48,.85) 0%,rgba(6,19,48,0) 35%)}
 @media (max-width:960px){.hero-bg.filled{inset:0}.hero-bg.filled::after{background:linear-gradient(180deg,rgba(6,19,48,.94) 0%,rgba(6,19,48,.8) 55%,rgba(6,19,48,.55) 100%)}}
+
+/* Service visuals: product + data callouts across the full visual area */
+.svc-vis{height:200px;padding:14px 14px 10px}
+.svc-vis .ph{width:100%}
+.svc-vis .ph.filled img{object-fit:contain}
+.svc-ic{top:12px;left:12px}
+
+/* Zoomable technical images */
+.zoomable{cursor:zoom-in}
+.zoom-hint{position:absolute;right:10px;bottom:10px;z-index:2;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#061330;background:#2EC5DC;padding:5px 10px;border-radius:999px;opacity:0;transform:translateY(4px);transition:opacity .2s ease,transform .2s ease}
+.zoomable:hover .zoom-hint,.zoomable:focus-visible .zoom-hint{opacity:1;transform:none}
+@media (hover:none){.zoom-hint{opacity:1;transform:none}}
+.lightbox{position:fixed;inset:0;z-index:80;background:rgba(4,13,34,.92);display:grid;place-items:center;padding:calc(56px + env(safe-area-inset-top,0px)) max(16px, env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-left,0px));gap:12px}
+.lightbox img{max-width:min(1600px,100%);max-height:calc(100vh - 140px);width:auto;height:auto;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.lightbox-cap{color:#C9D8EE;font-size:.95rem;text-align:center;max-width:70ch}
+.lightbox-close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:calc(16px + env(safe-area-inset-right,0px));background:#fff;color:#061330;border:0;border-radius:999px;padding:8px 18px;font:inherit;font-weight:800;cursor:pointer}
+
+/* Frames match the technical images exactly so no callout is cropped */
+.ind-card .ph{aspect-ratio:2400/1340}
+.prod .ph{height:auto;aspect-ratio:2400/1340}
+.prod .ph:not(.filled){aspect-ratio:auto;height:190px}
+.cta .ph.filled{height:auto;aspect-ratio:2400/1340}

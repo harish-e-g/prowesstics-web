@@ -6,8 +6,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ## [Unreleased]
 
 ### Added
-- Technical, data-driven visuals across every image slot: detection boxes with confidence, 2D-to-wireframe conversion, measurements, heat maps, pipeline flows and live inspection readouts.
+- Technical, data-driven visuals across every image slot: detection boxes with confidence, 2D-to-wireframe conversion, measurements, thermal and footfall heat maps, data panels, event streams and part genealogy.
+- Service card visuals combining real hardware cut-outs with live data callouts.
+- Card and detail versions of product images; click any product, industry or contact image to open the full technical view in a lightbox (keyboard and Escape supported).
+- `tools/visuals/` generators that reproduce every overlay from the source photos.
 - Complete repository documentation: README, licence, contributing guide, security policy, issue and pull request templates, repository settings.
+
+### Changed
+- IND-03 BFSI image replaced with a full-colour scene with a clear desk.
+- IND-05 retail image replaced with a sharp-focus scene; IMG-13 ProSight AI image replaced with a clean full-frame hypermarket.
+- Image frames now match the 16:9 images exactly so no callout is cropped.
 
 ## [1.0.0] - 2026-10-14
 

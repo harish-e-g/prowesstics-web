@@ -26,7 +26,7 @@ export function Services() {
             <a className={`svc-card ${s.tone}`} href="#contact" key={s.title}>
               <div className="svc-vis">
                 <span className="svc-ic"><ServiceGlyph name={s.icon} /></span>
-                <ImageSlot id={s.slot} light sizes="(max-width: 560px) 90vw, 320px" />
+                <ImageSlot id={s.slot} light sizes="(max-width: 560px) 90vw, 360px" />
               </div>
               <div className="svc-body">
                 <h3>{s.title}</h3>
@@ -52,7 +52,7 @@ export function Industries() {
         <div className="ind-grid">
           {industries.map((d) => (
             <article className="ind-card" key={d.name}>
-              <ImageSlot id={d.slot} label={d.name} sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 400px" />
+              <ImageSlot id={d.slot} label={d.name} sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 400px" zoom />
               <div className="ind-body">
                 <div className="ind-h"><span className="ind-ic"><IndustryGlyph name={d.icon} color={d.color} /></span><h3>{d.name}</h3></div>
                 <p>{d.line}</p>
@@ -90,7 +90,7 @@ export function Solutions() {
         <div className="prods">
           {products.map((p) => (
             <article className={`prod${p.big ? " big" : ""}`} key={p.name}>
-              <ImageSlot id={p.slot} label={p.name} note={p.slotLabel} sizes="(max-width: 640px) 100vw, 50vw" />
+              <ImageSlot id={p.slot} label={p.name} note={p.slotLabel} sizes="(max-width: 640px) 100vw, 50vw" zoom />
               <div className="prod-b">
                 <span className="prod-k">{p.kind}</span>
                 <h3>{p.name}</h3>

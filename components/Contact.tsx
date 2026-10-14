@@ -37,7 +37,7 @@ export default function Contact() {
             <span>{site.email}</span>
             <button className="copy" type="button" onClick={copy}>{copied ? "Copied" : "Copy"}</button>
           </div>
-          <ImageSlot id="IMG-15" label="Contact visual" note="Consultant with a plant manager" sizes="(max-width: 900px) 100vw, 50vw" />
+          <ImageSlot id="IMG-15" label="Contact visual" note="Consultant with a plant manager" sizes="(max-width: 900px) 100vw, 50vw" zoom />
         </div>
         <form onSubmit={handleSubmit} noValidate>
           <h3>Request a consultation</h3>
