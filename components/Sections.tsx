@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { services, industries, commitments, products, steps, clients, results, techRow1, techRow2 } from "@/content/site";
+import Link from "next/link";
+import { services, slug, industries, commitments, products, steps, clients, results, techRow1, techRow2 } from "@/content/site";
 import ImageSlot from "./ImageSlot";
 import { Arrow, ServiceGlyph, IndustryGlyph } from "./icons";
 
@@ -11,32 +12,32 @@ function Head({ eyebrow, title, body, link }: { eyebrow: string; title: string; 
         <h2>{title}</h2>
         {body && <p>{body}</p>}
       </div>
-      {link && <a className="tlink" href={link.href}>{link.label} <Arrow /></a>}
+      {link && <Link className="tlink" href={link.href}>{link.label} <Arrow /></Link>}
     </div>
   );
 }
 
+// Full services list, shown on /services/. Editorial rows rather than product-style cards.
 export function Services() {
   return (
     <section className="sec svc" id="services">
       <div className="wrap">
-        <Head eyebrow="Our services" title="End-to-End Data, AI & Automation Services" body="From the first pipeline to the decision on the shop floor, we build data platforms and AI that your teams actually use." link={{ label: "View All Solutions", href: "#solutions" }} />
-        <div className="svc-grid">
-          {services.map((s) => (
-            <a className={`svc-card ${s.tone}`} href="#contact" key={s.title}>
-              <div className="svc-vis">
-                <span className="svc-ic"><ServiceGlyph name={s.icon} /></span>
-                <ImageSlot id={s.slot} light sizes="(max-width: 560px) 90vw, 360px" />
-              </div>
-              <div className="svc-body">
+        <div className="svc-list">
+          {services.map((s, i) => (
+            <article className="svc-row" id={slug(s.title)} key={s.title}>
+              <div className="svc-txt">
+                <span className="svc-n">{String(i + 1).padStart(2, "0")}</span>
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
                 <ul>{s.points.map((p) => <li key={p}>{p}</li>)}</ul>
                 <div className="svc-out"><b>{s.outcome.v}</b><span>{s.outcome.l}</span></div>
                 <div className="svc-tech">{s.tech.map((t) => <span key={t}>{t}</span>)}</div>
-                <span className="svc-go">Explore service <Arrow size={16} /></span>
+                <Link className="tlink" href="/#contact">Discuss this service <Arrow size={16} /></Link>
               </div>
-            </a>
+              <div className={`svc-vis ${s.tone}`}>
+                <ImageSlot id={s.slot} light sizes="(max-width: 860px) 90vw, 520px" />
+              </div>
+            </article>
           ))}
         </div>
       </div>
@@ -48,7 +49,7 @@ export function Industries() {
   return (
     <section className="sec" id="industries">
       <div className="wrap">
-        <Head eyebrow="Industries we serve" title="Built for the industries that run on data" body="Nine sectors where our data platforms, AI and vision systems are already in production." link={{ label: "Talk to an industry lead", href: "#contact" }} />
+        <Head eyebrow="Industries we serve" title="Built for the industries that run on data" body="Nine sectors where our data platforms, AI and vision systems are already in production." link={{ label: "Talk to an industry lead", href: "/#contact" }} />
         <div className="ind-grid">
           {industries.map((d) => (
             <article className="ind-card" key={d.name}>
@@ -57,7 +58,7 @@ export function Industries() {
                 <div className="ind-h"><span className="ind-ic"><IndustryGlyph name={d.icon} color={d.color} /></span><h3>{d.name}</h3></div>
                 <p>{d.line}</p>
                 <div className="ind-uses">{d.uses.map((u) => <span key={u}>{u}</span>)}</div>
-                <a className="tlink" href="#contact">See use cases <Arrow size={16} /></a>
+                <Link className="tlink" href="/#contact">See use cases <Arrow size={16} /></Link>
               </div>
             </article>
           ))}
@@ -86,7 +87,7 @@ export function Solutions() {
   return (
     <section className="sec dark" id="solutions">
       <div className="wrap">
-        <Head eyebrow="Our solutions" title="Products built for outcomes" body="Proven platforms you can deploy in weeks, trained on your data and running on your stack." link={{ label: "Book a demo", href: "#contact" }} />
+        <Head eyebrow="Our solutions" title="Products built for outcomes" body="Proven platforms you can deploy in weeks, trained on your data and running on your stack." link={{ label: "Book a demo", href: "/#contact" }} />
         <div className="prods">
           {products.map((p) => (
             <article className={`prod${p.big ? " big" : ""}`} key={p.name}>
@@ -95,8 +96,9 @@ export function Solutions() {
                 <span className="prod-k">{p.kind}</span>
                 <h3>{p.name}</h3>
                 <p>{p.body}</p>
-                <div className="kpis">{p.kpis.map((k) => <div key={k.l}><b>{k.v}</b><span>{k.l}</span></div>)}</div>
-                {p.cta && <a className="tlink" href="#contact">{p.cta} <Arrow /></a>}
+                {p.kpis.length > 0 && <div className="kpis">{p.kpis.map((k) => <div key={k.l}><b>{k.v}</b><span>{k.l}</span></div>)}</div>}
+                {p.tags && <div className="prod-tags">{p.tags.map((t) => <span key={t}>{t}</span>)}</div>}
+                {p.cta && <Link className="tlink" href="/#contact">{p.cta} <Arrow /></Link>}
               </div>
             </article>
           ))}
@@ -148,7 +150,7 @@ export function Results() {
   return (
     <section className="sec" style={{ background: "var(--mist)", paddingTop: 0 }}>
       <div className="wrap">
-        <Head eyebrow="Results you can expect" title="Before and after, measured" link={{ label: "Read client stories", href: "#voices" }} />
+        <Head eyebrow="Results you can expect" title="Before and after, measured" link={{ label: "Read client stories", href: "/#voices" }} />
         <div className="res-grid">
           {results.map((r) => (
             <div className="res" key={r.who}>

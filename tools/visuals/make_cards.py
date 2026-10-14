@@ -35,15 +35,7 @@ h.chip(20, 20, "RENEWALS 27% → 38%", GREEN, "62,624 policies")
 h.note("Illustrative visualisation")
 h.save(OUT + "IMG-11.jpg")
 
-# IMG-12 DEO Suite (small card)
-h = HUD(SRCDIR + "SRC_IMG-12.png", 1672, 2752, fs=2.4)
-h.box((598, 552, 832, 746), GREEN, corner=26)
-h.box((378, 656, 562, 852), AMBER, corner=24)
-h.chip(20, 20, "10 SYSTEMS → 1 DATA LAYER", CYAN, "refresh < 20 min")
-h.chip(620, 300, "OTIF  ✓ 96.4%", GREEN)
-h.chip(20, 470, "DWELL 3 h 40 m", AMBER)
-h.note("Illustrative visualisation")
-h.save(OUT + "IMG-12.jpg")
+# IMG-12 DEO Suite: card and detail are drawn by make_deo.py
 
 # IMG-13 ProSight AI (small card)
 h = HUD(SRCDIR + "GAMMA_IMG-13.jpg", 1376, 2752, fs=2.4)

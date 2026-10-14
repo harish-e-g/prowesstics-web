@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { footerCols, site } from "@/content/site";
 
 export default function Footer() {
@@ -13,7 +14,7 @@ export default function Footer() {
           {footerCols.map((c) => (
             <div key={c.title}>
               <b>{c.title}</b>
-              {c.links.map(([label, href]) => <a key={label} href={href}>{label}</a>)}
+              {c.links.map(([label, href]) => <Link key={label} href={href}>{label}</Link>)}
             </div>
           ))}
         </div>

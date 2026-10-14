@@ -18,7 +18,7 @@ export const images: Record<string, Slot> = {
   "IMG-09": { src: "/images/IMG-09.png", alt: "Staff augmentation: certified experts and stack coverage", cutout: true },
   "IMG-10": { src: "/images/IMG-10.jpg", detail: "/images/IMG-10-detail.jpg", alt: "ProVision AI detecting a surface defect, verifying PPE and converting a part to a 2D wireframe on a production line" },
   "IMG-11": { src: "/images/IMG-11.jpg", detail: "/images/IMG-11-detail.jpg", alt: "ProChurn AI scoring customer churn risk with the top drivers for each policy" },
-  "IMG-12": { src: "/images/IMG-12.jpg", detail: "/images/IMG-12-detail.jpg", alt: "DEO Suite unifying ten logistics systems into a live control tower at a container port" },
+  "IMG-12": { src: "/images/IMG-12.jpg", detail: "/images/IMG-12-detail.jpg", alt: "DEO Suite data engineering optimization: engineers reviewing a pipeline DAG and runtime trends" },
   "IMG-13": { src: "/images/IMG-13.jpg", detail: "/images/IMG-13-detail.jpg", alt: "ProSight AI footfall heat map, shopper dwell tracking and out-of-stock alerts in a supermarket" },
   "IMG-14": { src: "/images/IMG-14.jpg", detail: "/images/IMG-14-detail.jpg", alt: "ProTrace AI reading a part code, confirming the variant and logging its full genealogy" },
   "IMG-15": { src: "/images/IMG-15.jpg", detail: "/images/IMG-15-detail.jpg", alt: "Prowesstics consultant and plant manager reviewing a two-week pilot" },

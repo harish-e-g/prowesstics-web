@@ -1,6 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import { Services, Industries, Commitments, Solutions, Engage, Clients, Results, TechStack } from "@/components/Sections";
+import { Industries, Commitments, Solutions, Engage, Clients, Results, TechStack } from "@/components/Sections";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -40,10 +40,9 @@ export default function Home() {
       <Nav />
       <main id="top">
         <Hero />
-        <Services />
+        <Solutions />
         <Industries />
         <Commitments />
-        <Solutions />
         <Engage />
         <Clients />
         <Results />

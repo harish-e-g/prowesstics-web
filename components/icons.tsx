@@ -84,7 +84,7 @@ export function ServiceGlyph({ name }: { name: string }) {
     case "cloud":
       return <svg {...c}><path d="M7 18a4.5 4.5 0 0 1-.7-9 6 6 0 0 1 11.4 1.5A3.8 3.8 0 0 1 17.2 18Z" /></svg>;
     case "chip":
-      return <svg {...c}><rect x="6" y="6" width="12" height="12" rx="2" /><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" /><text x="12" y="14.2" fontSize="5.5" fontWeight={800} textAnchor="middle" fill="currentColor" stroke="none" fontFamily="sans-serif">AI</text></svg>;
+      return <svg {...c}><rect x="6" y="6" width="12" height="12" rx="2" /><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" /><text x="12" y="14.2" fontSize="5.5" fontWeight={500} textAnchor="middle" fill="currentColor" stroke="none" fontFamily="sans-serif">AI</text></svg>;
     case "eye":
       return <svg {...c}><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" /><circle cx="12" cy="12" r="3" /></svg>;
     case "gear":

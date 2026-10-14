@@ -6,6 +6,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ## [Unreleased]
 
 ### Added
+- Services and Solutions drop-down menus in the top bar, plus a mobile menu.
+- `/services/` page listing all eight services as editorial rows, each with its own link anchor.
+- DEO Suite (Data Engineering Optimization) image with pipeline DAG and runtime readouts (`tools/visuals/make_deo.py`).
 - GitHub Pages publishing: `.github/workflows/deploy-pages.yml` builds and deploys on every push to `main`; live at https://harish-e-g.github.io/prowesstics-web/.
 - `NEXT_PUBLIC_BASE_PATH` support and a static image loader (`lib/image-loader.ts`) so every image, logo and lightbox view works when the site is served from a sub-folder.
 - Technical, data-driven visuals across every image slot: detection boxes with confidence, 2D-to-wireframe conversion, measurements, thermal and footfall heat maps, data panels, event streams and part genealogy.
@@ -15,6 +18,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Complete repository documentation: README, licence, contributing guide, security policy, issue and pull request templates, repository settings.
 
 ### Changed
+- Homepage: the services cards move off the homepage to `/services/`; "Products built for outcomes" now follows the hero, with DEO Suite beside ProVision AI.
+- Typography: no weight above medium (500) anywhere; body and heading text set to near-black.
+- Stats bar: number and label stacked so labels no longer run into the dividers.
+- Testimonials show whole cards only; ProSight and ProTrace show capability tags instead of word-only figures; BFSI image readouts no longer repeat ProChurn's.
 - IND-03 BFSI image replaced with a full-colour scene with a clear desk.
 - IND-05 retail image replaced with a sharp-focus scene; IMG-13 ProSight AI image replaced with a clean full-frame hypermarket.
 - Image frames now match the 16:9 images exactly so no callout is cropped.

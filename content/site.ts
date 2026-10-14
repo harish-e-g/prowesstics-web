@@ -11,14 +11,18 @@ export const site = {
   founded: "2017",
 };
 
-export const nav = [
-  { label: "Services", href: "#services" },
-  { label: "Industries", href: "#industries" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Clients", href: "#clients" },
-  { label: "Technology", href: "#stack" },
-  { label: "Insights", href: "#voices" },
+// Top bar. "menu" items open a drop-down built from the services or products lists below.
+export const nav: { label: string; href: string; menu?: "services" | "solutions" }[] = [
+  { label: "Services", href: "/services/", menu: "services" },
+  { label: "Solutions", href: "/#solutions", menu: "solutions" },
+  { label: "Industries", href: "/#industries" },
+  { label: "Clients", href: "/#clients" },
+  { label: "Technology", href: "/#stack" },
+  { label: "Insights", href: "/#voices" },
 ];
+
+// URL-safe id for a title, e.g. "Cloud & Migration" -> "cloud-migration".
+export const slug = (t: string) => t.toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 export const hero = {
   kicker: ["DATA", "ANALYTICS", "AI", "CLOUD", "AUTOMATION"],
@@ -80,13 +84,13 @@ export const commitments = [
 
 export const products: {
   name: string; kind: string; body: string; kpis: { v: string; l: string }[];
-  cta?: string; big?: boolean; slot: string; slotLabel: string;
+  cta?: string; big?: boolean; slot: string; slotLabel: string; tags?: string[];
 }[] = [
   { name: "ProVision AI", kind: "Computer vision", body: "Turn the CCTV you already own into a thinking layer that flags the deviation before the defect and the near-miss before the incident.", kpis: [{ v: "64", l: "use cases" }, { v: "<100 ms", l: "edge alerts" }, { v: "3–4×", l: "ROI" }], cta: "Book a 2-week pilot", big: true, slot: "IMG-10", slotLabel: "Quality station on a production line" },
-  { name: "ProChurn AI", kind: "Retention intelligence", body: "Know which customers are about to leave, why, and the save action most likely to keep them, 10 to 45 days ahead.", kpis: [{ v: "85%", l: "accuracy" }, { v: "0.92", l: "ROC AUC" }, { v: "+11 pts", l: "renewal lift" }], cta: "Run my payback", big: true, slot: "IMG-11", slotLabel: "Retention team at an insurer" },
-  { name: "DEO Suite", kind: "Data engineering", body: "Ten logistics systems, one governed data layer, refreshed continuously.", kpis: [{ v: "10", l: "systems unified" }, { v: "81%", l: "faster refresh" }], slot: "IMG-12", slotLabel: "Logistics loading dock" },
-  { name: "ProSight AI", kind: "Retail analytics", body: "Footfall, heatmaps, dwell time and basket analysis from your store cameras.", kpis: [{ v: "FMCG", l: "and warehousing" }], slot: "IMG-13", slotLabel: "Supermarket aisle" },
-  { name: "ProTrace AI", kind: "Factory automation", body: "Station-level traceability and poka-yoke wired into PLC, SCADA, MES and SAP.", kpis: [{ v: "Full", l: "factory automation" }], slot: "IMG-14", slotLabel: "Barcode traceability station" },
+  { name: "DEO Suite", kind: "Data Engineering Optimization", body: "Pipelines that run late, cost too much or fail silently, re-engineered and kept under watch. DEO Suite profiles every ETL job, rebuilds the slow ones on your cloud and monitors freshness and quality, so reports land on time and every number traces back to its source.", kpis: [{ v: "<90 min", l: "daily ETL, was 8–12 h" }, { v: "50%", l: "faster ETL runtime" }, { v: "99.5%+", l: "pipeline uptime" }], cta: "Get a pipeline health check", big: true, slot: "IMG-12", slotLabel: "Data engineering operations" },
+  { name: "ProChurn AI", kind: "Retention intelligence", body: "Know which customers are about to leave, why, and the save action most likely to keep them, 10 to 45 days ahead.", kpis: [{ v: "85%", l: "accuracy" }, { v: "0.92", l: "ROC AUC" }, { v: "+11 pts", l: "renewal lift" }], cta: "Run my payback", slot: "IMG-11", slotLabel: "Retention team at an insurer" },
+  { name: "ProSight AI", kind: "Retail analytics", body: "Footfall, heatmaps, dwell time and basket analysis from your store cameras.", kpis: [], tags: ["FMCG", "Warehousing", "Existing CCTV"], slot: "IMG-13", slotLabel: "Supermarket aisle" },
+  { name: "ProTrace AI", kind: "Factory automation", body: "Station-level traceability and poka-yoke wired into PLC, SCADA, MES and SAP.", kpis: [], tags: ["PLC", "SCADA", "MES", "SAP"], slot: "IMG-14", slotLabel: "Barcode traceability station" },
 ];
 
 export const steps = [
@@ -185,8 +189,8 @@ export const interests = [
 ];
 
 export const footerCols = [
-  { title: "Services", links: [["Data Engineering", "#services"], ["Business Intelligence", "#services"], ["Cloud & Migration", "#services"], ["AI & Analytics", "#services"], ["Staff Augmentation", "#services"]] },
-  { title: "Solutions", links: [["ProVision AI", "#solutions"], ["ProChurn AI", "#solutions"], ["DEO Suite", "#solutions"], ["ProSight AI", "#solutions"], ["ProTrace AI", "#solutions"]] },
-  { title: "Industries", links: [["Manufacturing", "#industries"], ["BFSI & Insurance", "#industries"], ["Logistics", "#industries"], ["Retail & FMCG", "#industries"], ["Healthcare", "#industries"]] },
-  { title: "Company", links: [["Clients", "#clients"], ["Testimonials", "#voices"], ["Technology", "#stack"], ["Contact", "#contact"]] },
+  { title: "Services", links: [["Data Engineering", "/services/#data-engineering"], ["Business Intelligence", "/services/#business-intelligence"], ["Cloud & Migration", "/services/#cloud-migration"], ["AI & Analytics", "/services/#ai-advanced-analytics"], ["Staff Augmentation", "/services/#staff-augmentation"]] },
+  { title: "Solutions", links: [["ProVision AI", "/#solutions"], ["DEO Suite", "/#solutions"], ["ProChurn AI", "/#solutions"], ["ProSight AI", "/#solutions"], ["ProTrace AI", "/#solutions"]] },
+  { title: "Industries", links: [["Manufacturing", "/#industries"], ["BFSI & Insurance", "/#industries"], ["Logistics", "/#industries"], ["Retail & FMCG", "/#industries"], ["Healthcare", "/#industries"]] },
+  { title: "Company", links: [["Services", "/services/"], ["Clients", "/#clients"], ["Testimonials", "/#voices"], ["Technology", "/#stack"], ["Contact", "/#contact"]] },
 ] as const;

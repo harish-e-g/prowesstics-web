@@ -27,7 +27,7 @@ export default function Hero() {
             <h1>{hero.title}<span className="c">{hero.highlight}</span></h1>
             <p className="lede">{hero.lede}</p>
             <div className="hero-cta">
-              <a className="btn btn-grad" href="#services">Explore Our Services <Arrow size={20} /></a>
+              <a className="btn btn-grad" href="#solutions">Explore Our Solutions <Arrow size={20} /></a>
               <FilmButton />
             </div>
           </div>
@@ -47,8 +47,10 @@ export default function Hero() {
           {stats.map((s) => (
             <div className="st" key={s.value}>
               <StatGlyph name={s.icon} />
-              <b>{s.value}</b>
-              <span>{s.label[0]}<br />{s.label[1]}</span>
+              <div className="st-t">
+                <b>{s.value}</b>
+                <span>{s.label[0]} {s.label[1]}</span>
+              </div>
             </div>
           ))}
         </div>
