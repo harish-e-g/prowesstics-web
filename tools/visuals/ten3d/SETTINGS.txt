@@ -1,0 +1,2 @@
+Final render settings (query string):
+dist=1150&ry=-0.27&rx=-0.14&metal=0.62&rough=0.16&ctop=%2333CDE8&cmid=%231A9FD8&cbot=%23123A99&cy=60&front=0.6

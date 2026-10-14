@@ -1,0 +1,112 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+<style>html,body{margin:0;background:transparent}</style></head><body>
+<script type="module">
+import * as THREE from "three";
+import { toCreasedNormals } from "three/addons/utils/BufferGeometryUtils.js";
+const P = Object.fromEntries(new URLSearchParams(location.search));
+const W = +(P.w || 2400), H = +(P.h || 1860);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setSize(W, H); renderer.setPixelRatio(1);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = +(P.exp || 1.0);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.VSMShadowMap;
+document.body.appendChild(renderer.domElement);
+
+// ---------- environment: studio of soft boxes over a navy surround ----------
+const env = new THREE.Scene();
+const skyMat = new THREE.ShaderMaterial({ side: THREE.BackSide, uniforms: {}, vertexShader: `varying vec3 vP; void main(){ vP = normalize(position); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0);} `,
+  fragmentShader: `varying vec3 vP; void main(){ float t = vP.y*0.5+0.5;
+    vec3 low = vec3(0.012,0.035,0.10); vec3 mid = vec3(0.02,0.07,0.18); vec3 top = vec3(0.16,0.62,0.80);
+    vec3 c = mix(low, mid, smoothstep(0.0,0.55,t)); c = mix(c, top, smoothstep(0.62,1.0,t));
+    gl_FragColor = vec4(c,1.0);} ` });
+env.add(new THREE.Mesh(new THREE.SphereGeometry(50, 64, 32), skyMat));
+function box(w, h, x, y, z, color, intensity) {
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(intensity), side: THREE.DoubleSide }));
+  m.position.set(x, y, z); m.lookAt(0, 0, 0); env.add(m); return m;
+}
+box(30, 9, -10, 22, 16, "#E8FCFF", 2.6);    // large soft box above, front left
+box(5, 34, 26, 2, 10, "#7FE3F2", 1.5);       // tall cyan strip on the right
+box(5, 30, -27, -2, 8, "#3E8FD6", 0.9);      // cooler strip on the left
+box(40, 4, 0, -14, 22, "#0B2A6A", 1.0);      // faint low bounce
+box(44, 1.3, 2, 17, 14, "#FFFFFF", +(P.strip || 5));   // thin top strip: crisp bevel highlight
+box(1.2, 30, 19, 3, 20, "#CFF7FF", +(P.vstrip || 3.5)); // thin vertical strip: edge highlight on the right
+box(26, 22, -16, 10, 30, "#8FE6F7", +(P.front || 0.5));  // broad soft front-left fill: gradient sheen on the faces
+const pm = new THREE.PMREMGenerator(renderer);
+const envTex = pm.fromScene(env, 0.02).texture;
+
+const scene = new THREE.Scene();
+scene.environment = envTex;
+
+// ---------- geometry (design units, y up) ----------
+const CX = +(P.cx || 258), CY = 134, A = 78, B = 104, T = 34, N = 2.5;
+const sgn = v => v > 0 ? 1 : v < 0 ? -1 : 0;
+function se(a, b, steps, ox = 0, oy = 0) {
+  const pts = [];
+  for (let i = 0; i < steps; i++) { const t = -Math.PI / 2 + 2 * Math.PI * i / steps; const c = Math.cos(t), s = Math.sin(t);
+    pts.push(new THREE.Vector2(CX + a * sgn(c) * Math.abs(c) ** (2 / N) + ox, -(CY + b * sgn(s) * Math.abs(s) ** (2 / N)) + oy)); }
+  return pts;
+}
+const DEPTH = +(P.depth || 30), BT = +(P.bt || 8), BS = +(P.bs || 6);
+const zeroShape = new THREE.Shape(se(A - BS, B - BS, 360).reverse());
+zeroShape.holes.push(new THREE.Path(se(A - T + BS, B - T + BS, 360)));
+const TOP = CY - B, BOT = CY + B;
+const oneRaw = [[147, TOP], [147, BOT], [93, BOT], [93, TOP + 72], [59, TOP + 86], [59, TOP + 44], [106, TOP]];
+// inset the 1 by the bevel size so the bevelled silhouette keeps the design outline
+const oneShape = new THREE.Shape(oneRaw.map(([x, y]) => new THREE.Vector2(x, -y)).reverse());
+const ext = { depth: DEPTH, bevelEnabled: true, bevelThickness: BT, bevelSize: BS, bevelSegments: 12, curveSegments: 64, steps: 1 };
+function mesh(shape) {
+  let g = new THREE.ExtrudeGeometry(shape, ext);
+  g = toCreasedNormals(g, THREE.MathUtils.degToRad(35));
+  // vertical colour ramp: cyan upper surfaces, turquoise mid, deep blue lower
+  const pos = g.attributes.position, col = [];
+  const cTop = new THREE.Color(P.ctop || "#5FE3F2"), cMid = new THREE.Color(P.cmid || "#1A9FD8"), cBot = new THREE.Color(P.cbot || "#0F3C9E");
+  for (let i = 0; i < pos.count; i++) { const y = pos.getY(i); const t = THREE.MathUtils.clamp((y - (-BOT)) / (BOT - TOP), 0, 1);
+    const c = t > 0.5 ? cMid.clone().lerp(cTop, (t - 0.5) / 0.5) : cBot.clone().lerp(cMid, t / 0.5); col.push(c.r, c.g, c.b); }
+  g.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
+  const m = new THREE.Mesh(g, new THREE.MeshPhysicalMaterial({ vertexColors: true, metalness: +(P.metal || 0.45), roughness: +(P.rough || 0.24),
+    clearcoat: 1, clearcoatRoughness: 0.06, envMapIntensity: +(P.envi || 1.25) }));
+  m.castShadow = true; m.receiveShadow = true; return m;
+}
+const group = new THREE.Group();
+const zero = mesh(zeroShape), one = mesh(oneShape);
+group.add(zero, one);
+// centre the composition
+const bb = new THREE.Box3().setFromObject(group); const ctr = bb.getCenter(new THREE.Vector3());
+group.children.forEach(m => m.position.sub(new THREE.Vector3(ctr.x, ctr.y, 0)));
+group.rotation.set(+(P.rx || -0.16), +(P.ry || -0.34), +(P.rz || 0));
+scene.add(group);
+
+// ---------- lights ----------
+const key = new THREE.DirectionalLight("#DFF8FF", +(P.key || 2.2)); key.position.set(-180, 260, 320); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 18; key.shadow.blurSamples = 25;
+Object.assign(key.shadow.camera, { left: -260, right: 260, top: 260, bottom: -260, near: 10, far: 1200 });
+scene.add(key);
+const rim = new THREE.DirectionalLight("#4FD3EA", +(P.rim || 1.4)); rim.position.set(260, 80, -200); scene.add(rim);
+const fill = new THREE.DirectionalLight("#1B4FB0", 0.8); fill.position.set(120, -200, 180); scene.add(fill);
+scene.add(new THREE.AmbientLight("#0A1F44", 0.6));
+// contact shadow catcher
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(1400, 1400), new THREE.ShadowMaterial({ opacity: +(P.shadow || 0.45) }));
+floor.rotation.x = -Math.PI / 2; floor.position.y = -B - 6; floor.receiveShadow = true;
+const floorG = new THREE.Group(); floorG.add(floor); floorG.rotation.copy(group.rotation); if (P.floor === '1') scene.add(floorG);
+
+// ---------- camera ----------
+const cam = new THREE.PerspectiveCamera(+(P.fov || 20), W / H, 1, 5000);
+cam.position.set(0, +(P.cy || 40), +(P.dist || 900)); cam.lookAt(0, +(P.ly || 0), 0);
+renderer.render(scene, cam);
+
+// ---------- projected contours for the golden light (output pixel space) ----------
+group.updateMatrixWorld(true);
+function project(pts2, z) {
+  return pts2.map(p => { const v = new THREE.Vector3(p.x - ctr.x, p.y - ctr.y, z).applyMatrix4(group.matrixWorld).project(cam);
+    return [ (v.x * 0.5 + 0.5) * W, (-v.y * 0.5 + 0.5) * H ]; });
+}
+const zf = DEPTH + BT;  // front cap plane
+window.__contours = {
+  rim: project(se(A - BS * 0.25, B - BS * 0.25, 720), DEPTH + BT * 0.55),        // on the curved front bevel, outer edge
+  faceOuter: project(se(A - BS, B - BS, 360), zf),
+  faceInner: project(se(A - T + BS, B - T + BS, 360), zf),
+  silhouette: project(se(A, B, 360), DEPTH * 0.5),
+};
+window.__done = true;
+</script></body></html>

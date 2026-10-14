@@ -286,22 +286,16 @@ html,body{margin:0}
 }
 
 .ten-svg{width:clamp(230px,26vw,370px);height:auto;flex:none;overflow:visible}
-/* 10-year mark: reveal once, then only the golden ray moves (compositor-friendly, no JS per frame) */
-.ten-num{animation:ten-in 1.1s cubic-bezier(.2,.7,.2,1) both}
-.ten-sheen{animation:ten-fade 1.2s .5s ease-out both}
-.ten-light{animation:ten-fade .9s 1.4s ease-out both}
-.ten-ray{stroke-dashoffset:0;animation:ten-ray 9s 1.4s linear infinite}
-.ten-glint{opacity:0;animation:ten-glint 9s linear infinite}
-.ten-warm-still,.ten-glint-still{display:none}
-@keyframes ten-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* 10-year mark: 3D render + SVG light. Reveal once, then only the golden light moves. */
+.ten-num{animation:ten-in 1.2s cubic-bezier(.2,.7,.2,1) both}
+.ten-light{animation:ten-fade 1s 1.6s ease-out both}
+.ten-still{display:none}
+@keyframes ten-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes ten-fade{from{opacity:0}to{opacity:1}}
-@keyframes ten-ray{from{stroke-dashoffset:0}to{stroke-dashoffset:-1000}}
-@keyframes ten-glint{0%{opacity:0;transform:scale(.2) rotate(0deg)}1.2%{opacity:.95;transform:scale(1) rotate(20deg)}4%{opacity:0;transform:scale(.4) rotate(45deg)}100%{opacity:0}}
 @media (prefers-reduced-motion: reduce){
-  .ten-num,.ten-sheen,.ten-light{animation:none}
-  .ten-ray{animation:none;stroke-dashoffset:-130}
-  .ten-glint{display:none}
-  .ten-warm-still,.ten-glint-still{display:inline}
+  .ten-num,.ten-light{animation:none}
+  .ten-anim{display:none}
+  .ten-still{display:inline}
 }
 @media (max-width:560px){.badge{gap:14px}.ten-svg{width:170px}}
 

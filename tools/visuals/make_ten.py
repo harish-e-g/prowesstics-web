@@ -1,243 +1,167 @@
-"""Generates components/TenBadge.tsx: the sculpted SVG "10" with a golden ray on the zero's contour.
+"""Builds the hero 10-year mark from the 3D render.
 
-Geometry is computed here so the ray path is the zero's real outer contour (a superellipse),
-and the star glints sit exactly on that contour, timed to the moment the ray passes them.
+Inputs (tools/visuals/ten3d/): render.png, a physically based three.js render of the bevelled,
+extruded "10" (see render.html and SETTINGS.txt), and contours.json, the zero's front-bevel
+contour projected through the same camera. Because the light path comes from the 3D model itself,
+the golden ray sits exactly on the zero's rim in the picture.
+
+Outputs: public/brand/ten-3d.webp and components/TenBadge.tsx.
 Run: python3 tools/visuals/make_ten.py
 """
-import math, os
+import json, math, os
+from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "..", "..", "components", "TenBadge.tsx")
+ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
+R = os.path.join(HERE, "ten3d")
+PERIOD, START = 10, 1.6     # seconds per lap; delay before the light appears
+SCALE, PAD = 0.5, 70        # render is 2x; padding (render px) around the numerals
 
-CX, CY = 246, 134          # zero centre
-A, B, T = 78, 104, 34      # outer semi-axes and wall thickness
-N = 2.5                    # superellipse exponent: squarer than an ellipse, softer than a rectangle
-DX, DY = 7, 9              # extrusion depth (towards bottom right)
-PERIOD = 9                 # seconds per lap of the golden ray
-START = 1.4                # seconds before the ray appears (after the reveal)
+im = Image.open(os.path.join(R, "render.png")).convert("RGBA")
+x0, y0, x1, y1 = im.getbbox()
+box = (x0 - PAD, y0 - PAD, x1 + PAD, y1 + PAD + 40)  # extra room below for the contact shadow
+crop = im.crop(box)
+W, H = round(crop.width * SCALE), round(crop.height * SCALE)
+crop.resize((W, H), Image.LANCZOS).save(os.path.join(ROOT, "public", "brand", "ten-3d.webp"), "WEBP", quality=90, method=6)
 
-def sgn(v): return (v > 0) - (v < 0)
-
-def superellipse(a, b, n, cx, cy, steps=720, start=-math.pi / 2):
-    pts = []
-    for i in range(steps):
-        t = start + 2 * math.pi * i / steps
-        c, s = math.cos(t), math.sin(t)
-        pts.append((cx + a * sgn(c) * abs(c) ** (2 / n), cy + b * sgn(s) * abs(s) ** (2 / n)))
-    return pts
+C = json.load(open(os.path.join(R, "contours.json")))
+def tx(pts):
+    return [((x - box[0]) * SCALE, (y - box[1]) * SCALE) for x, y in pts]
 
 def resample(pts, count):
-    """Even spacing by arc length, so path length fractions match the visible position."""
     closed = pts + [pts[0]]
     seg = [math.dist(closed[i], closed[i + 1]) for i in range(len(pts))]
-    total = sum(seg)
-    out, acc, j = [], 0.0, 0
+    total, out, acc, j = sum(seg), [], 0.0, 0
     for k in range(count):
         target = total * k / count
         while acc + seg[j] < target:
             acc += seg[j]; j += 1
-        f = (target - acc) / seg[j]
-        (x0, y0), (x1, y1) = closed[j], closed[j + 1]
-        out.append((x0 + (x1 - x0) * f, y0 + (y1 - y0) * f))
-    return out, total
+        f = (target - acc) / seg[j] if seg[j] else 0
+        (ax, ay), (bx, by) = closed[j], closed[j + 1]
+        out.append((ax + (bx - ax) * f, ay + (by - ay) * f))
+    return out
 
-def smooth_path(pts):
-    """Closed Catmull-Rom spline through the points, written as cubic Beziers."""
+def smooth(pts):
     n = len(pts)
-    d = [f"M{pts[0][0]:.2f} {pts[0][1]:.2f}"]
+    d = [f"M{pts[0][0]:.1f} {pts[0][1]:.1f}"]
     for i in range(n):
         p0, p1, p2, p3 = pts[i - 1], pts[i], pts[(i + 1) % n], pts[(i + 2) % n]
-        c1 = (p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6)
-        c2 = (p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6)
-        d.append(f"C{c1[0]:.2f} {c1[1]:.2f} {c2[0]:.2f} {c2[1]:.2f} {p2[0]:.2f} {p2[1]:.2f}")
+        d.append(f"C{p1[0] + (p2[0] - p0[0]) / 6:.1f} {p1[1] + (p2[1] - p0[1]) / 6:.1f} "
+                 f"{p2[0] - (p3[0] - p1[0]) / 6:.1f} {p2[1] - (p3[1] - p1[1]) / 6:.1f} {p2[0]:.1f} {p2[1]:.1f}")
     return "".join(d) + "Z"
 
-def contour(a, b, dx=0, dy=0, count=96):
-    pts, _ = resample(superellipse(a, b, N, CX + dx, CY + dy), count)
-    return pts
+rim = resample(tx(C["rim"]), 160)
+RIM = smooth(rim)
+FACE = smooth(resample(tx(C["faceOuter"]), 120)) + smooth(resample(tx(C["faceInner"]), 100)[::-1])
+sil = tx(C["silhouette"])
+sx0, sx1 = min(p[0] for p in sil), max(p[0] for p in sil)
+sy1 = max(p[1] for p in sil)
 
-outer = contour(A, B)
-inner = contour(A - T, B - T)
-# the counter is drawn in the opposite direction so the zero is one closed ring (nonzero fill)
-ZERO = smooth_path(outer) + smooth_path(inner[::-1])
-ZERO_BACK = smooth_path(contour(A, B, DX, DY)) + smooth_path(contour(A - T, B - T, DX, DY)[::-1])
-OUTER = smooth_path(outer)
-INNER = smooth_path(inner)
-RAY = smooth_path(contour(A + 0.4, B + 0.4))  # the light rides on the outer rim
+# light resting point for the still state (upper right shoulder, 13% round the lap)
+still = resample(tx(C["rim"]), 1000)[130]
 
-# numeral 1: a tapered flag and a straight stem, the same height as the zero
-TOP, BOT = CY - B, CY + B
-ONE_PTS = [(147, TOP), (147, BOT), (93, BOT), (93, TOP + 72), (59, TOP + 86), (59, TOP + 44), (106, TOP)]
-ONE = "M" + "L".join(f"{x} {y}" for x, y in ONE_PTS) + "Z"
-ONE_BACK = "M" + "L".join(f"{x + DX} {y + DY}" for x, y in ONE_PTS) + "Z"
+# trail: stacked dashes whose heads coincide; length (of 1000), width, colour, opacity
+LAYERS = [(190, 2.4, "#E8B452", 0.22), (110, 3.0, "#E8B452", 0.42), (55, 3.6, "#F0C066", 0.72), (20, 4.2, "#FFD98C", 0.95)]
+def trail(offset_anim):
+    out = []
+    for l, w, c, o in LAYERS:
+        anim = (f'<animate attributeName="stroke-dashoffset" from="0" to="-1000" dur="{PERIOD}s" begin="{START}s" repeatCount="indefinite" />'
+                if offset_anim else "")
+        off = "" if offset_anim else ' strokeDashoffset="-130"'
+        out.append(f'<path d={{RIM}} pathLength={{1000}} strokeDasharray="0 {1000 - l} {l} 0"{off} stroke="{c}" strokeWidth="{w}" strokeOpacity="{o}">{anim}</path>')
+    return "\n            ".join(out)
 
-# true extrusion: one quad per edge between the front face and the face pushed back by (DX, DY),
-# shaded by which way the wall faces (light from the upper left), grouped into a few tones
-def walls(poly):
-    """Union of the visible side quads for one closed outline, as a single path."""
-    out, n = [], len(poly)
-    for i in range(n):
-        (x0, y0), (x1, y1) = poly[i], poly[(i + 1) % n]
-        ex, ey = x1 - x0, y1 - y0
-        nx, ny = ey, -ex                          # outward normal for a clockwise-on-screen loop
-        if nx * DX + ny * DY <= 0:                # wall turned away from the viewer: hidden
-            continue
-        out.append(f"M{x0:.2f} {y0:.2f}L{x1:.2f} {y1:.2f}L{x1 + DX:.2f} {y1 + DY:.2f}L{x0 + DX:.2f} {y0 + DY:.2f}Z")
-    return "".join(out)
+def spill(offset_anim):
+    anim = (f'<animate attributeName="stroke-dashoffset" from="0" to="-1000" dur="{PERIOD}s" begin="{START}s" repeatCount="indefinite" />'
+            if offset_anim else "")
+    off = "" if offset_anim else ' strokeDashoffset="-130"'
+    return (f'<path d={{RIM}} pathLength={{1000}} strokeDasharray="0 920 80 0"{off} fill="none" stroke="#E8B452" strokeWidth="22" strokeOpacity="0.2" filter="url(#tnSoft)">{anim}</path>')
 
-# glints at chosen fractions of the lap, delayed so each fires as the ray head passes
-ray_pts, _ = resample(superellipse(A + 0.4, B + 0.4, N, CX, CY), 1000)
-GLINTS = [0.12, 0.47, 0.71]
-STILL = 0.13  # where the light rests when motion is reduced (upper right shoulder)
+# glints: brief, fired three times a lap as the head passes those points
+GLINT_AT = [0.13, 0.46, 0.74]
+kt, kv = ["0"], ["0"]
+for f in GLINT_AT:
+    kt += [f"{f - 0.012:.3f}", f"{f:.3f}", f"{f + 0.03:.3f}"]; kv += ["0", "1", "0"]
+kt.append("1"); kv.append("0")
 
-def star(x, y, r):
-    k = r * 0.22
-    return (f"M{x:.1f} {y - r:.1f}Q{x + k:.1f} {y - k:.1f} {x + r:.1f} {y:.1f}"
-            f"Q{x + k:.1f} {y + k:.1f} {x:.1f} {y + r:.1f}Q{x - k:.1f} {y + k:.1f} {x - r:.1f} {y:.1f}"
-            f"Q{x - k:.1f} {y - k:.1f} {x:.1f} {y - r:.1f}Z")
+tsx = f'''// Prowesstics 10-year mark. The numerals are a physically based 3D render (bevelled extrusion,
+// clear-coated metallic material, studio environment lighting; see tools/visuals/ten3d), shipped as
+// one static image. The golden light is animated on top with SVG, along the zero's front-bevel
+// contour projected from the same 3D model, so it rides exactly on the rim.
+// Generated by tools/visuals/make_ten.py. No JavaScript runs per frame; the numerals never move
+// after the reveal; prefers-reduced-motion shows the finished still with the light at rest.
+import {{ asset }} from "@/lib/image-loader";
 
-glint_svg = []
-for f in GLINTS:
-    x, y = ray_pts[int(f * 1000) % 1000]
-    glint_svg.append(
-        f'          <g className="ten-glint" style={{{{ animationDelay: "{START + f * PERIOD:.2f}s", transformOrigin: "{x:.1f}px {y:.1f}px" }}}}>\n'
-        f'            <path d="{star(x, y, 11)}" fill="#FFF3D6" />\n'
-        f'            <circle cx="{x:.1f}" cy="{y:.1f}" r="2.2" fill="#FFFFFF" />\n'
-        f'          </g>')
-sx, sy = ray_pts[int(STILL * 1000)]
-
-# trail layers: [dash length, width, colour, opacity]; every head sits at the same point
-LAYERS = [(160, 2.0, "#E8B452", 0.45), (70, 2.6, "#F2BC55", 0.75), (24, 3.2, "#FFD27A", 1), (2.5, 6, "#FFF4D6", 1)]
-layer_svg = "\n".join(
-    f'          <path className="ten-ray" d={{RAY}} pathLength={{1000}} strokeDasharray="0 {1000 - l:g} {l:g} 0" stroke="{c}" strokeWidth="{w}" strokeOpacity="{o}" />'
-    for l, w, c, o in LAYERS)
-
-dense_outer = contour(A, B, count=240)
-dense_inner = contour(A - T, B - T, count=240)[::-1]   # counter walls face inward
-walls_svg = "\n".join([
-    f'        <path d="{walls(ONE_PTS)}" fill="url(#tnWall)" stroke="url(#tnWall)" strokeWidth="0.5" />',
-    f'        <path d="{walls(dense_outer)}" fill="url(#tnWall)" stroke="url(#tnWall)" strokeWidth="0.5" />',
-    f'        <path d="{walls(dense_inner)}" fill="url(#tnWallIn)" stroke="url(#tnWallIn)" strokeWidth="0.5" />',
-])
-
-tsx = f'''// Prowesstics 10-year mark: a sculpted "1" and a closed superellipse "0" in cyan-blue,
-// with one golden ray travelling the zero's real outer contour. Generated by tools/visuals/make_ten.py.
-// Pure SVG + CSS: no JavaScript runs per frame, the numerals never move after the reveal,
-// and prefers-reduced-motion shows the finished still composition with the light at rest.
-
-const ZERO = "{ZERO}";
-const ZERO_BACK = "{ZERO_BACK}";
-const OUTER = "{OUTER}";
-const INNER = "{INNER}";
-const RAY = "{RAY}";
-const ONE = "{ONE}";
-const ONE_BACK = "{ONE_BACK}";
+const RIM = "{RIM}";
+const FACE = "{FACE}";
 
 export default function TenBadge() {{
   return (
-    <svg className="ten-svg" viewBox="0 0 360 290" role="img" aria-label="10 years">
+    <svg className="ten-svg" viewBox="0 0 {W} {H}" role="img" aria-label="10 years">
       <defs>
         <radialGradient id="tnStage" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" stopColor="#0E2A66" stopOpacity="0.85" />
-          <stop offset="0.55" stopColor="#061330" stopOpacity="0.6" />
+          <stop offset="0" stopColor="#0B2254" stopOpacity="0.95" />
+          <stop offset="0.55" stopColor="#061330" stopOpacity="0.82" />
           <stop offset="1" stopColor="#061330" stopOpacity="0" />
         </radialGradient>
-        <linearGradient id="tnFace" x1="0" y1="0" x2="0.35" y2="1">
-          <stop offset="0" stopColor="#8FEAF5" />
-          <stop offset="0.28" stopColor="#3CCBE0" />
-          <stop offset="0.62" stopColor="#1A8FD8" />
-          <stop offset="1" stopColor="#1546B8" />
-        </linearGradient>
-        <linearGradient id="tnWall" x1="0" y1="1" x2="1" y2="0.2">
-          <stop offset="0" stopColor="#081F57" />
-          <stop offset="0.55" stopColor="#123E95" />
-          <stop offset="1" stopColor="#2A74D2" />
-        </linearGradient>
-        <linearGradient id="tnWallIn" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#041030" />
-          <stop offset="1" stopColor="#0B2A70" />
-        </linearGradient>
-        <linearGradient id="tnSheen" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0.18" stopColor="#FFFFFF" stopOpacity="0" />
-          <stop offset="0.3" stopColor="#FFFFFF" stopOpacity="0.32" />
-          <stop offset="0.36" stopColor="#FFFFFF" stopOpacity="0.06" />
-          <stop offset="0.62" stopColor="#FFFFFF" stopOpacity="0" />
-          <stop offset="0.7" stopColor="#BFF6FF" stopOpacity="0.14" />
-          <stop offset="0.78" stopColor="#FFFFFF" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="tnRimLit" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#E9FDFF" stopOpacity="0.95" />
-          <stop offset="0.45" stopColor="#9BEFFA" stopOpacity="0.35" />
-          <stop offset="1" stopColor="#0B2C7A" stopOpacity="0.6" />
-        </linearGradient>
-        <linearGradient id="tnRimIn" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#06205E" stopOpacity="0.9" />
-          <stop offset="0.6" stopColor="#3FB8E0" stopOpacity="0.3" />
-          <stop offset="1" stopColor="#D8FBFF" stopOpacity="0.85" />
-        </linearGradient>
-        <radialGradient id="tnCounter" cx="0.42" cy="0.38" r="0.7">
-          <stop offset="0" stopColor="#0C2F7A" />
-          <stop offset="1" stopColor="#051235" />
-        </radialGradient>
-        <radialGradient id="tnFloor" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" stopColor="#000814" stopOpacity="0.55" />
+        <radialGradient id="tnContact" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stopColor="#000814" stopOpacity="0.7" />
           <stop offset="1" stopColor="#000814" stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="tnWarm" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" stopColor="#E8B452" stopOpacity="0.35" />
+        <radialGradient id="tnHead" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stopColor="#FFF8E6" stopOpacity="1" />
+          <stop offset="0.18" stopColor="#FFE2A0" stopOpacity="0.9" />
+          <stop offset="0.5" stopColor="#E8B452" stopOpacity="0.28" />
           <stop offset="1" stopColor="#E8B452" stopOpacity="0" />
         </radialGradient>
-        <clipPath id="tnFaces">
-          <path d={{ZERO}} />
-          <path d={{ONE}} />
-        </clipPath>
-        <clipPath id="tnZeroFace">
-          <path d={{ZERO}} />
-        </clipPath>
+        <linearGradient id="tnRayH" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#FFF4D6" stopOpacity="0" />
+          <stop offset="0.5" stopColor="#FFF4D6" stopOpacity="0.95" />
+          <stop offset="1" stopColor="#FFF4D6" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="tnRayV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#FFF4D6" stopOpacity="0" />
+          <stop offset="0.5" stopColor="#FFF4D6" stopOpacity="0.95" />
+          <stop offset="1" stopColor="#FFF4D6" stopOpacity="0" />
+        </linearGradient>
+        <filter id="tnSoft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5" /></filter>
+        <clipPath id="tnFace"><path d={{FACE}} /></clipPath>
       </defs>
 
-      {{/* environment: a quiet navy stage and a soft floor shadow */}}
-      <ellipse cx="200" cy="140" rx="190" ry="150" fill="url(#tnStage)" />
-      <ellipse cx="205" cy="258" rx="150" ry="14" fill="url(#tnFloor)" />
+      <ellipse cx="{W / 2:.0f}" cy="{H / 2:.0f}" rx="{W * 0.62:.0f}" ry="{H * 0.66:.0f}" fill="url(#tnStage)" />
+      <ellipse className="ten-num" cx="{(sx0 + sx1) / 2 - 20:.0f}" cy="{sy1 + 14:.0f}" rx="{(sx1 - sx0) * 0.95:.0f}" ry="16" fill="url(#tnContact)" />
+      <image className="ten-num" href={{asset("/brand/ten-3d.webp")}} x="0" y="0" width="{W}" height="{H}" />
 
-      <g className="ten-num">
-        {{/* extruded depth: side walls shaded by the direction they face */}}
-        <path d={{ONE_BACK}} fill="#071C4E" />
-        <path d={{ZERO_BACK}} fill="#071C4E" />
-{walls_svg}
-        {{/* counter of the zero */}}
-        <path d={{INNER}} fill="url(#tnCounter)" />
-        {{/* front faces */}}
-        <path d={{ONE}} fill="url(#tnFace)" />
-        <path d={{ZERO}} fill="url(#tnFace)" />
-        {{/* restrained metallic sheen across both numerals */}}
-        <g clipPath="url(#tnFaces)" className="ten-sheen">
-          <rect x="40" y="20" width="300" height="230" fill="url(#tnSheen)" />
+      {{/* animated light */}}
+      <g className="ten-light ten-anim">
+        <g clipPath="url(#tnFace)">{spill(True)}</g>
+        <g fill="none" strokeLinecap="round">
+            {trail(True)}
         </g>
-        {{/* bevel edges: lit from the top left */}}
-        <path d={{ONE}} fill="none" stroke="url(#tnRimLit)" strokeWidth="1.6" strokeLinejoin="round" />
-        <path d={{OUTER}} fill="none" stroke="url(#tnRimLit)" strokeWidth="1.6" />
-        <path d={{INNER}} fill="none" stroke="url(#tnRimIn)" strokeWidth="1.6" />
+        <g>
+          <animateMotion dur="{PERIOD}s" begin="{START}s" repeatCount="indefinite" path={{RIM}} />
+          <circle r="24" fill="url(#tnHead)" />
+          <circle r="3.2" fill="#FFF8E8" />
+          <g opacity="0">
+            <animate attributeName="opacity" dur="{PERIOD}s" begin="{START}s" repeatCount="indefinite" values="{';'.join(kv)}" keyTimes="{';'.join(kt)}" />
+            <rect x="-30" y="-0.9" width="60" height="1.8" fill="url(#tnRayH)" />
+            <rect x="-0.9" y="-20" width="1.8" height="40" fill="url(#tnRayV)" />
+          </g>
+        </g>
       </g>
 
-      {{/* golden ray on the zero's outer contour */}}
-      <g className="ten-light">
-        <circle cx="{sx:.1f}" cy="{sy:.1f}" r="38" fill="url(#tnWarm)" className="ten-warm-still" />
-        <g clipPath="url(#tnZeroFace)">
-          <path className="ten-ray" d={{RAY}} pathLength={{1000}} strokeDasharray="0 940 60 0" fill="none" stroke="#E8B452" strokeWidth="12" strokeOpacity="0.2" strokeLinecap="round" />
-        </g>
+      {{/* still state for reduced motion: the light at rest on the upper right shoulder */}}
+      <g className="ten-still">
+        <g clipPath="url(#tnFace)">{spill(False)}</g>
         <g fill="none" strokeLinecap="round">
-{layer_svg}
+            {trail(False)}
         </g>
-{chr(10).join(glint_svg)}
-        <g className="ten-glint-still" style={{{{ transformOrigin: "{sx:.1f}px {sy:.1f}px" }}}}>
-          <path d="{star(sx, sy, 10)}" fill="#FFF3D6" />
-          <circle cx="{sx:.1f}" cy="{sy:.1f}" r="2.2" fill="#FFFFFF" />
-        </g>
+        <circle cx="{still[0]:.1f}" cy="{still[1]:.1f}" r="24" fill="url(#tnHead)" />
+        <circle cx="{still[0]:.1f}" cy="{still[1]:.1f}" r="3.2" fill="#FFF8E8" />
       </g>
     </svg>
   );
 }}
 '''
-open(OUT, "w").write(tsx)
-print("wrote", os.path.normpath(OUT), "still head at", round(sx, 1), round(sy, 1))
+open(os.path.join(ROOT, "components", "TenBadge.tsx"), "w").write(tsx)
+print(f"ten-3d.webp {W}x{H}; still light at {still[0]:.0f},{still[1]:.0f}")
