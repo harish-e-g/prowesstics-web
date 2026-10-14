@@ -20,6 +20,7 @@ const jsonLd = {
       logo: `${site.url}/brand/wordmark.png`,
       email: site.email,
       foundingDate: site.founded,
+      numberOfEmployees: { "@type": "QuantitativeValue", minValue: 200 },
       description: site.description,
       address: { "@type": "PostalAddress", addressLocality: "Chennai", addressRegion: "Tamil Nadu", addressCountry: "IN" },
     },

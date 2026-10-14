@@ -6,7 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ## [Unreleased]
 
 ### Added
-- 10-year mark rebuilt as a physically based 3D render (bevelled extrusion, clear-coated metallic material, studio environment lighting, real inner walls through the zero) shipped as one 37 KB WebP; the golden light, trail, warm surface spill and brief glints are SVG, animated along the zero's rim contour projected from the same 3D model. Reduced motion shows the still with the light at rest (`tools/visuals/ten3d/`, `tools/visuals/make_ten.py`).
+- 10-year mark: original glass-ring design restored, now animated for the tenth anniversary: the 1 rises, the ring turns into place, the gold rim draws in, then orbits slowly (passing behind the 1) with a glowing lead, a light sweep crosses both numerals, the halo breathes and soft gold sparkles twinkle. CSS transform and opacity only; reduced motion shows the still design.
+- Stats bar: 200+ Team Members added (six figures), plus numberOfEmployees in the Organization structured data.
 - Services and Solutions drop-down menus in the top bar, plus a mobile menu.
 - `/services/` page listing all eight services as editorial rows, each with its own link anchor.
 - DEO Suite (Data Engineering Optimization) image with pipeline DAG and runtime readouts (`tools/visuals/make_deo.py`).

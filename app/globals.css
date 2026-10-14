@@ -102,16 +102,16 @@ p{margin:0}
 
 /* STATS */
 .stats{background:#fff;box-shadow:0 18px 40px -30px rgba(10,31,68,.35);position:relative;z-index:3}
-.stats .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding-block:26px}
-@media (max-width:980px){.stats .wrap{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:22px}}
+.stats .wrap{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding-block:26px}
+@media (max-width:1180px){.stats .wrap{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:22px}}
 @media (max-width:560px){.stats .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.st{display:flex;align-items:center;gap:16px;padding:6px 22px;border-right:1px solid var(--line);min-width:0}
+.st{display:flex;align-items:center;gap:14px;padding:6px 18px;border-right:1px solid var(--line);min-width:0}
 .st:last-child{border-right:0}
-@media (max-width:980px){.st{border-right:0}}
+@media (max-width:1180px){.st{border-right:0}}
 .st svg{flex:none;color:var(--ink)}
 .st-t{display:grid;gap:2px;min-width:0}
 .st b{font-size:clamp(1.6rem,2.3vw,2rem);line-height:1.1;font-weight:500;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
-.st span{font-size:.86rem;color:var(--muted);line-height:1.3}
+.st span{font-size:.86rem;color:var(--muted);line-height:1.3;white-space:nowrap}
 .st:first-child{padding-left:0}
 
 /* INDUSTRIES */
@@ -285,17 +285,30 @@ html,body{margin:0}
   .st span{flex-basis:100%}
 }
 
-.ten-svg{width:clamp(230px,26vw,370px);height:auto;flex:none;overflow:visible}
-/* 10-year mark: 3D render + SVG light. Reveal once, then only the golden light moves. */
-.ten-num{animation:ten-in 1.2s cubic-bezier(.2,.7,.2,1) both}
-.ten-light{animation:ten-fade 1s 1.6s ease-out both}
-.ten-still{display:none}
-@keyframes ten-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@keyframes ten-fade{from{opacity:0}to{opacity:1}}
+.ten-svg{width:clamp(220px,25vw,350px);height:auto;flex:none;overflow:visible}
+/* 10-year mark animation: reveal once, then a slow gold orbit, light sweep, breathing halo, sparkles.
+   Only transform and opacity animate, so it stays on the compositor. */
+.ten-svg g,.ten-svg path,.ten-svg circle,.ten-svg rect{transform-box:view-box}
+.ten-one{transform-origin:74px 236px;animation:ten-rise 1s cubic-bezier(.2,.8,.2,1) .1s both}
+.ten-ring{transform-origin:214px 132px;animation:ten-ring 1.2s cubic-bezier(.2,.8,.2,1) .35s both}
+.ten-halo{animation:ten-fadein 1.4s .2s ease-out both,ten-breathe 5s 1.6s ease-in-out infinite}
+.ten-gold{stroke-dasharray:250 480;animation:ten-draw 1.1s cubic-bezier(.4,0,.2,1) 1s both}
+.ten-orbit{transform-origin:214px 132px;animation:ten-orbit 18s linear 2.2s infinite}
+.ten-lead{opacity:0;animation:ten-fadein .6s 2s ease-out forwards}
+.ten-sweep{opacity:0;animation:ten-sweep 7s ease-in-out 2.4s infinite}
+.ten-spark{opacity:0;transform:scale(.2);animation:ten-twinkle 7.8s ease-in-out infinite}
+@keyframes ten-rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes ten-ring{from{opacity:0;transform:scale(.82) rotate(-50deg)}to{opacity:1;transform:none}}
+@keyframes ten-fadein{from{opacity:0}to{opacity:.75}}
+@keyframes ten-breathe{0%,100%{opacity:.75}50%{opacity:.45}}
+@keyframes ten-draw{from{stroke-dasharray:0 730}to{stroke-dasharray:250 480}}
+@keyframes ten-orbit{to{transform:rotate(360deg)}}
+@keyframes ten-sweep{0%{opacity:0;transform:translateX(0) skewX(-18deg)}6%{opacity:1}30%{opacity:1;transform:translateX(560px) skewX(-18deg)}34%,100%{opacity:0;transform:translateX(560px) skewX(-18deg)}}
+@keyframes ten-twinkle{0%,100%{opacity:0;transform:scale(.2) rotate(0deg)}6%{opacity:1;transform:scale(1) rotate(25deg)}14%{opacity:0;transform:scale(.3) rotate(60deg)}}
 @media (prefers-reduced-motion: reduce){
-  .ten-num,.ten-light{animation:none}
-  .ten-anim{display:none}
-  .ten-still{display:inline}
+  .ten-one,.ten-ring,.ten-halo,.ten-gold,.ten-orbit,.ten-lead,.ten-sweep,.ten-spark{animation:none}
+  .ten-lead{opacity:1}
+  .ten-sweep,.ten-spark{opacity:0}
 }
 @media (max-width:560px){.badge{gap:14px}.ten-svg{width:170px}}
 

@@ -43,6 +43,8 @@ export function StatGlyph({ name }: { name: string }) {
       return <svg {...c}><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" /></svg>;
     case "experts":
       return <svg {...c}><circle cx="9" cy="8" r="3.2" /><path d="M3 20c.6-3.4 3-5.2 6-5.2s5.4 1.8 6 5.2" /><path d="M16 4.5a3 3 0 0 1 0 6M18 14.8c1.7.6 2.7 2.4 3 5.2" /></svg>;
+    case "people":
+      return <svg {...c}><circle cx="12" cy="7" r="2.6" /><circle cx="5" cy="9.5" r="2.1" /><circle cx="19" cy="9.5" r="2.1" /><path d="M7.5 19c.5-3 2.2-4.6 4.5-4.6s4 1.6 4.5 4.6M1.8 18.5c.3-2.3 1.5-3.6 3.2-3.6 1 0 1.8.4 2.4 1.1M22.2 18.5c-.3-2.3-1.5-3.6-3.2-3.6-1 0-1.8.4-2.4 1.1" /></svg>;
     case "db":
       return <svg {...c}><ellipse cx="12" cy="6" rx="7" ry="2.6" /><path d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" /></svg>;
     default:
@@ -77,6 +79,8 @@ export function IndustryGlyph({ name, color }: { name: string; color: string }) 
 export function ServiceGlyph({ name }: { name: string }) {
   const c = { className: "ic", width: 32, height: 32, viewBox: "0 0 24 24", strokeWidth: 1.8, "aria-hidden": true, ...line };
   switch (name) {
+    case "people":
+      return <svg {...c}><circle cx="12" cy="7" r="2.6" /><circle cx="5" cy="9.5" r="2.1" /><circle cx="19" cy="9.5" r="2.1" /><path d="M7.5 19c.5-3 2.2-4.6 4.5-4.6s4 1.6 4.5 4.6M1.8 18.5c.3-2.3 1.5-3.6 3.2-3.6 1 0 1.8.4 2.4 1.1M22.2 18.5c-.3-2.3-1.5-3.6-3.2-3.6-1 0-1.8.4-2.4 1.1" /></svg>;
     case "db":
       return <svg {...c}><ellipse cx="12" cy="6" rx="7" ry="2.6" /><path d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" /></svg>;
     case "bars":

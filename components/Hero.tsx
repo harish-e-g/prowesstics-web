@@ -49,7 +49,7 @@ export default function Hero() {
               <StatGlyph name={s.icon} />
               <div className="st-t">
                 <b>{s.value}</b>
-                <span>{s.label[0]} {s.label[1]}</span>
+                <span>{s.label[0]}<br />{s.label[1]}</span>
               </div>
             </div>
           ))}

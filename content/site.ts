@@ -36,10 +36,11 @@ export const hero = {
   sideBottom: ["FROM", "DATA", "TO", "ACTION"],
 };
 
-export type StatIcon = "team" | "spark" | "experts" | "db" | "globe";
+export type StatIcon = "team" | "spark" | "experts" | "db" | "globe" | "people";
 export const stats: { value: string; label: [string, string]; icon: StatIcon }[] = [
   { value: "10+", label: ["Years of", "Expertise"], icon: "team" },
   { value: "370+", label: ["Projects", "Delivered"], icon: "spark" },
+  { value: "200+", label: ["Team", "Members"], icon: "people" },
   { value: "60+", label: ["Certified", "Experts"], icon: "experts" },
   { value: "5+ PB", label: ["Data", "Processed"], icon: "db" },
   { value: "95%", label: ["Client", "Satisfaction"], icon: "globe" },

@@ -7,8 +7,6 @@ These scripts turn realistic source photos into the technical, data-driven image
 | `hud.py` | Shared toolkit: boxes, chips, panels, heat maps, wireframes, flows |
 | `overlay_provision.py` | Full ProVision AI technical view (`IMG-10-detail.jpg`) |
 | `make_products.py` | Full technical views for ProChurn, ProSight, ProTrace and the pilot review (`IMG-11`, `IMG-13` to `IMG-15` detail images) |
-| `ten3d/` | three.js studio scene for the 10-year mark (`render.html`, `shot.mjs`, `SETTINGS.txt`) and its output `render.png` + projected `contours.json` |
-| `make_ten.py` | Crops the 3D render to `public/brand/ten-3d.webp` and writes `components/TenBadge.tsx` with the golden light on the projected rim |
 | `make_deo.py` | DEO Suite card and detail views (`IMG-12.jpg`, `IMG-12-detail.jpg`) |
 | `make_cards.py` | Card-size product versions with large callouts (`IMG-10`, `IMG-11`, `IMG-13` to `IMG-15`) |
 | `make_industries.py` | Industry grid images (`IND-01` to `IND-09`) |
