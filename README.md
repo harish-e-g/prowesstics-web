@@ -247,14 +247,18 @@ Place the video in `public/video/` and set `companyFilm` in `content/images.ts`,
 
 ## 11. Deployment
 
-### 11.1 Vercel (recommended)
-1. Sign in at https://vercel.com with GitHub.
-2. **Add New > Project**, import `prowesstics-web`, keep the detected Next.js settings, click **Deploy**.
-3. **Settings > Domains**: add `prowesstics.com` and `www.prowesstics.com`, then add the DNS records Vercel shows at the domain registrar.
-4. Every push to `main` deploys to production. Every pull request gets its own preview URL.
+### 11.1 GitHub Pages (live)
+The site is published to **https://harish-e-g.github.io/prowesstics-web/** by `.github/workflows/deploy-pages.yml`.
+1. One-time: **Settings > Pages > Build and deployment > Source: GitHub Actions**.
+2. Every push to `main` builds a static copy and publishes it in about two minutes. Progress shows under the **Actions** tab.
+3. Custom domain: enter it under **Settings > Pages > Custom domain**, add the DNS records GitHub shows at the registrar, then set `BASE_PATH: ""` in the workflow so the site is served from the domain root.
+4. The repository must stay public on a free GitHub plan for Pages to work.
 
-### 11.2 Static copy
-`npm run preview:static` writes a plain static copy to `out/`. It is used for quick previews and for hosts that serve static files only. Image optimisation is switched off in this mode.
+### 11.2 Vercel or Railway (alternative)
+Import the repository at https://vercel.com or https://railway.app and keep the detected Next.js settings. These hosts run the full Next.js server with automatic image resizing and work with a private repository. Vercel's free plan is for non-commercial use, so a company site needs Vercel Pro.
+
+### 11.3 Static copy
+`npm run preview:static` writes a plain static copy to `out/`. It is used for quick previews and for hosts that serve static files only. Images are served as built in this mode. Set `NEXT_PUBLIC_BASE_PATH` when the site lives in a sub-folder.
 
 ## 12. Contact form and lead capture
 

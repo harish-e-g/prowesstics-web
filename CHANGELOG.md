@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ## [Unreleased]
 
 ### Added
+- GitHub Pages publishing: `.github/workflows/deploy-pages.yml` builds and deploys on every push to `main`; live at https://harish-e-g.github.io/prowesstics-web/.
+- `NEXT_PUBLIC_BASE_PATH` support and a static image loader (`lib/image-loader.ts`) so every image, logo and lightbox view works when the site is served from a sub-folder.
 - Technical, data-driven visuals across every image slot: detection boxes with confidence, 2D-to-wireframe conversion, measurements, thermal and footfall heat maps, data panels, event streams and part genealogy.
 - Service card visuals combining real hardware cut-outs with live data callouts.
 - Card and detail versions of product images; click any product, industry or contact image to open the full technical view in a lightbox (keyboard and Escape supported).

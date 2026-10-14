@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { images } from "@/content/images";
+import { asset } from "@/lib/image-loader";
 
 type Props = {
   id: string;
@@ -23,7 +24,7 @@ export default function ImageSlot({ id, label, note, light, className = "", size
     <div
       className={cls}
       {...(canZoom
-        ? { "data-zoom": slot.detail || slot.src, "data-zoom-alt": slot.alt, role: "button", tabIndex: 0, "aria-label": `Enlarge: ${slot.alt}` }
+        ? { "data-zoom": asset((slot.detail || slot.src) as string), "data-zoom-alt": slot.alt, role: "button", tabIndex: 0, "aria-label": `Enlarge: ${slot.alt}` }
         : {})}
     >
       {filled ? (
