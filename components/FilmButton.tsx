@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { companyFilm } from "@/content/images";
+import { companyFilm, companyFilmPoster } from "@/content/images";
+import { asset } from "@/lib/image-loader";
 import { Play } from "./icons";
 
 export default function FilmButton() {
@@ -20,10 +21,10 @@ export default function FilmButton() {
         <span><b>See How We Create Impact</b><span>2 min video</span></span>
       </button>
       {open && (
-        <div className="video-modal" role="dialog" aria-modal="true" aria-label="Company film" onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
+        <div className="video-modal" role="dialog" aria-modal="true" aria-label="Smart Assembly and Packing Line film" onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
           <button type="button" onClick={() => setOpen(false)}>Close</button>
           {companyFilm ? (
-            <video src={companyFilm} controls autoPlay playsInline style={{ width: "min(960px,100%)", borderRadius: 18 }} />
+            <video src={asset(companyFilm)} poster={companyFilmPoster ? asset(companyFilmPoster) : undefined} controls autoPlay playsInline preload="metadata" style={{ width: "min(1100px,100%)", maxHeight: "82vh", borderRadius: 18, background: "#000" }} />
           ) : (
             <div className="ph"><span className="tag">VIDEO-01 · 2 min company film<span>Add the file to /public/video and set companyFilm in content/images.ts</span></span></div>
           )}

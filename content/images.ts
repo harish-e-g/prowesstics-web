@@ -43,5 +43,7 @@ export const images: Record<string, Slot> = {
   "IMG-25": { alt: "Travel and hospitality" },
 };
 
-// Optional company film. Place the file in /public/video and set the path, e.g. "/video/company-film.mp4"
-export const companyFilm: string | undefined = undefined;
+// Hero film ("See How We Create Impact"): the 2-minute Smart Assembly and Packing Line film on
+// factory automation and traceability, with background music and voiceover. Files live in /public/video.
+export const companyFilm: string | undefined = "/video/smart-assembly-line.mp4";
+export const companyFilmPoster: string | undefined = "/video/smart-assembly-line-poster.jpg";

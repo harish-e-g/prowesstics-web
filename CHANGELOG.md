@@ -6,6 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ## [Unreleased]
 
 ### Added
+- Hero film: "See How We Create Impact" now plays the 2-minute Smart Assembly and Packing Line film (factory automation and traceability, music and voiceover), rebranded to Prowesstics with frame-matched logo replacement (`public/video/`, `tools/video/`).
 - 10-year mark: original glass-ring design restored, now animated for the tenth anniversary: the 1 rises, the ring turns into place, the gold rim draws in, then orbits slowly (passing behind the 1) with a glowing lead, a light sweep crosses both numerals, the halo breathes and soft gold sparkles twinkle. CSS transform and opacity only; reduced motion shows the still design.
 - Stats bar: 200+ Team Members added (six figures), plus numberOfEmployees in the Organization structured data.
 - Services and Solutions drop-down menus in the top bar, plus a mobile menu.
@@ -20,6 +21,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Complete repository documentation: README, licence, contributing guide, security policy, issue and pull request templates, repository settings.
 
 ### Changed
+- Industries: use-case chips always sit in two rows on every card.
+- Laptop layout: on shorter screens (typical Windows laptops at 1280x720, 1366x768, 1536x864) the hero scales by screen height so the headline, buttons and the 10 fit above the stats bar; the side captions hide below 1400 px wide.
 - Services page: product-style hardware cut-outs replaced by real work scenes with technical callouts (`tools/visuals/make_service_scenes.py`); each service is now a chapter with The challenge / Our approach, outcome and stack, plus an index of all eight services.
 - Homepage: the services cards move off the homepage to `/services/`; "Products built for outcomes" now follows the hero, with DEO Suite beside ProVision AI.
 - Typography: no weight above medium (500) anywhere; body and heading text set to near-black.
