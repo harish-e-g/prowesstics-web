@@ -17,25 +17,36 @@ function Head({ eyebrow, title, body, link }: { eyebrow: string; title: string; 
   );
 }
 
-// Full services list, shown on /services/. Editorial rows rather than product-style cards.
+// Full services list, shown on /services/: an index, then one editorial chapter per service.
 export function Services() {
   return (
     <section className="sec svc" id="services">
       <div className="wrap">
+        <nav className="svc-index" aria-label="Services on this page">
+          {services.map((s, i) => (
+            <a href={`#${slug(s.title)}`} key={s.title}><span>{String(i + 1).padStart(2, "0")}</span>{s.title}</a>
+          ))}
+        </nav>
         <div className="svc-list">
           {services.map((s, i) => (
             <article className="svc-row" id={slug(s.title)} key={s.title}>
-              <div className="svc-txt">
-                <span className="svc-n">{String(i + 1).padStart(2, "0")}</span>
-                <h3>{s.title}</h3>
-                <p>{s.body}</p>
-                <ul>{s.points.map((p) => <li key={p}>{p}</li>)}</ul>
-                <div className="svc-out"><b>{s.outcome.v}</b><span>{s.outcome.l}</span></div>
-                <div className="svc-tech">{s.tech.map((t) => <span key={t}>{t}</span>)}</div>
-                <Link className="tlink" href="/#contact">Discuss this service <Arrow size={16} /></Link>
+              <div className="svc-vis">
+                <ImageSlot id={s.slot} sizes="(max-width: 860px) 92vw, 640px" zoom />
               </div>
-              <div className={`svc-vis ${s.tone}`}>
-                <ImageSlot id={s.slot} light sizes="(max-width: 860px) 90vw, 520px" />
+              <div className="svc-txt">
+                <span className="svc-n">{String(i + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}</span>
+                <h2>{s.title}</h2>
+                <p className="svc-lead">{s.body}</p>
+                <dl className="svc-ca">
+                  <div><dt>The challenge</dt><dd>{s.problem}</dd></div>
+                  <div><dt>Our approach</dt><dd>{s.approach}</dd></div>
+                </dl>
+                <ul>{s.points.map((p) => <li key={p}>{p}</li>)}</ul>
+                <div className="svc-foot">
+                  <div className="svc-out"><b>{s.outcome.v}</b><span>{s.outcome.l}</span></div>
+                  <div className="svc-tech">{s.tech.map((t) => <span key={t}>{t}</span>)}</div>
+                </div>
+                <Link className="tlink" href="/#contact">Discuss {s.title.toLowerCase()} <Arrow size={16} /></Link>
               </div>
             </article>
           ))}

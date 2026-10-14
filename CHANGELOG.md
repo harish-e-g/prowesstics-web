@@ -19,6 +19,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Complete repository documentation: README, licence, contributing guide, security policy, issue and pull request templates, repository settings.
 
 ### Changed
+- Services page: product-style hardware cut-outs replaced by real work scenes with technical callouts (`tools/visuals/make_service_scenes.py`); each service is now a chapter with The challenge / Our approach, outcome and stack, plus an index of all eight services.
 - Homepage: the services cards move off the homepage to `/services/`; "Products built for outcomes" now follows the hero, with DEO Suite beside ProVision AI.
 - Typography: no weight above medium (500) anywhere; body and heading text set to near-black.
 - Stats bar: number and label stacked so labels no longer run into the dividers.

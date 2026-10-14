@@ -11,7 +11,7 @@ These scripts turn realistic source photos into the technical, data-driven image
 | `make_deo.py` | DEO Suite card and detail views (`IMG-12.jpg`, `IMG-12-detail.jpg`) |
 | `make_cards.py` | Card-size product versions with large callouts (`IMG-10`, `IMG-11`, `IMG-13` to `IMG-15`) |
 | `make_industries.py` | Industry grid images (`IND-01` to `IND-09`) |
-| `make_services.py` | Service card visuals: product cut-out plus data callouts (`IMG-02` to `IMG-09`) |
+| `make_service_scenes.py` | Service images for /services/: real work scenes with callouts (`IMG-02.jpg` to `IMG-09.jpg`, sources `GAMMA_SVC-01.jpg` to `GAMMA_SVC-08.jpg`) |
 
 ## Run
 ```bash
