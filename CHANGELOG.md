@@ -21,6 +21,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Complete repository documentation: README, licence, contributing guide, security policy, issue and pull request templates, repository settings.
 
 ### Changed
+- Technology section: 78 official logos in three rows (cloud, BI and industrial; data engineering and databases; AI, ML and engineering), logos only with no captions, versions or years; adds Databricks, Microsoft Fabric, Kafka, Spark, Airflow, dbt, Delta Lake, Iceberg, Hugging Face, LangChain, OpenAI, Anthropic, Kubernetes, Terraform and more (`tools/tech-logos/`).
 - Hero film made universal: the client is no longer named in the voiceover or anywhere on screen (title subtitle, wall sign, HUD serial, pulley engraving, end card); new subtitle and end line on full-factory automation and digital transformation.
 - Industries: use-case chips always sit in two rows on every card.
 - Laptop layout (revised): on desktop widths the hero and stats bar size themselves from the visible browser height, so the white stats bar always shows in full in the first screen, from short Windows laptop windows (about 1265x550 at 150% scaling) to large monitors; stats stay on one row from 961 px.

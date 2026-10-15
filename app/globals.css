@@ -205,10 +205,10 @@ p{margin:0}
 .lg img{max-height:56px;max-width:170px;object-fit:contain}
 .lg.word{font-weight:500;color:var(--ink);font-size:1.1rem;text-align:center;line-height:1.1}
 .lg.word small{display:block;font-size:.6rem;letter-spacing:.16em;color:#8A97AD;margin-top:4px}
-.tech .lg{height:84px;min-width:0;padding:14px 22px}
-.tech .lg img{max-height:42px;max-width:120px}
-.tech .lg span{font-weight:500;font-size:.95rem;color:var(--ink);white-space:nowrap}
-.tech .lg .mono{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:500;font-size:.82rem;letter-spacing:-0.02em;flex:none}
+.tech .lg{height:78px;min-width:0;padding:0 30px;gap:0}
+.tech .lg img{height:34px;width:auto;max-width:none;display:block}
+.tech .marquee+.marquee{margin-top:14px}
+@media (max-width:640px){.tech .lg{height:62px;padding:0 20px}.tech .lg img{height:26px}}
 
 /* RESULTS */
 .res-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}

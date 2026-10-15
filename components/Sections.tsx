@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { services, slug, industries, commitments, products, steps, clients, results, techRow1, techRow2 } from "@/content/site";
+import { services, slug, industries, commitments, products, steps, clients, results, tech_platforms, tech_data, tech_ai } from "@/content/site";
 import ImageSlot from "./ImageSlot";
+import { asset } from "@/lib/image-loader";
 import { Arrow, ServiceGlyph, IndustryGlyph } from "./icons";
 
 function Head({ eyebrow, title, body, link }: { eyebrow: string; title: string; body?: string; link?: { label: string; href: string } }) {
@@ -176,27 +177,31 @@ export function Results() {
   );
 }
 
-function TechTile({ t }: { t: (typeof techRow1)[number] }) {
+function TechTile({ t }: { t: (typeof tech_ai)[number] }) {
   return (
     <div className="lg">
-      {t.logo ? <Image src={t.logo} alt="" width={120} height={42} /> : <span className="mono" style={{ background: t.color }}>{t.mono}</span>}
-      <span>{t.name}</span>
+      <img src={asset(`/tech/${t.id}.webp`)} alt={t.name} title={t.name} loading="lazy" decoding="async" />
     </div>
   );
 }
+
+const techRows = [
+  { items: tech_platforms, dur: "70s", rev: false },
+  { items: tech_data, dur: "78s", rev: true },
+  { items: tech_ai, dur: "84s", rev: false },
+];
 
 export function TechStack() {
   return (
     <section className="sec tech" id="stack">
       <div className="wrap">
-        <Head eyebrow="Technology" title="Fluent in your stack" body="Certified on the platforms you already run. We plug into your stack instead of replacing it." />
+        <Head eyebrow="Technology" title="Fluent in your stack" body="Cloud, data, AI and industrial platforms our engineers certify on and deliver with every day. We plug into what you run instead of replacing it." />
       </div>
-      <div className="marquee" style={{ ["--dur" as string]: "60s" }}>
-        <div className="marquee-track">{[...techRow1, ...techRow1].map((t, i) => <TechTile t={t} key={t.name + i} />)}</div>
-      </div>
-      <div className="marquee rev" style={{ ["--dur" as string]: "66s" }}>
-        <div className="marquee-track">{[...techRow2, ...techRow2].map((t, i) => <TechTile t={t} key={t.name + i} />)}</div>
-      </div>
+      {techRows.map((r, k) => (
+        <div className={`marquee${r.rev ? " rev" : ""}`} style={{ ["--dur" as string]: r.dur }} key={k}>
+          <div className="marquee-track">{[...r.items, ...r.items].map((t, i) => <TechTile t={t} key={t.id + i} />)}</div>
+        </div>
+      ))}
     </section>
   );
 }
