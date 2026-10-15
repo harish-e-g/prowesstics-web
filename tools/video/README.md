@@ -13,3 +13,15 @@ How it was made:
    (H.264 CRF 24, AAC 160k, faststart) with the original soundtrack untouched.
 
 Set `SRC` in both scripts to the source film path, then run `python3 scan2.py` and `python3 render.py`.
+
+## Universal edit (October 2026)
+
+The film no longer names the client anywhere:
+- Spoken name: the opening words naming the client (0.42 s to 1.08 s of the source) are cut from picture and sound.
+- On screen: the title subtitle and end-card line are inpainted and rewritten as
+  "Full-factory automation · Digital traceability · One Control Tower" and
+  "FULL-FACTORY AUTOMATION · DIGITAL TRANSFORMATION"; the 3D wall sign reads PROWESSTICS; the HUD serial
+  prefix reads PRW; the engraved prefix on the pulley rim is removed; the factory fascia sign is blanked.
+- `detect.py` finds the client-name text frame by frame (Tesseract); `jkf_track.json` tracks the engraving;
+  `render_u.py` (with `textfx.py`) renders the video track, then the cut and the original soundtrack are
+  joined with ffmpeg (see the command in the commit message).
