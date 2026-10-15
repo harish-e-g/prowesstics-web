@@ -22,7 +22,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ### Changed
 - Industries: use-case chips always sit in two rows on every card.
-- Laptop layout: on shorter screens (typical Windows laptops at 1280x720, 1366x768, 1536x864) the hero scales by screen height so the headline, buttons and the 10 fit above the stats bar; the side captions hide below 1400 px wide.
+- Laptop layout (revised): on desktop widths the hero and stats bar size themselves from the visible browser height, so the white stats bar always shows in full in the first screen, from short Windows laptop windows (about 1265x550 at 150% scaling) to large monitors; stats stay on one row from 961 px.
+- Laptop layout (first pass): on shorter screens (typical Windows laptops at 1280x720, 1366x768, 1536x864) the hero scales by screen height so the headline, buttons and the 10 fit above the stats bar; the side captions hide below 1400 px wide.
 - Services page: product-style hardware cut-outs replaced by real work scenes with technical callouts (`tools/visuals/make_service_scenes.py`); each service is now a chapter with The challenge / Our approach, outcome and stack, plus an index of all eight services.
 - Homepage: the services cards move off the homepage to `/services/`; "Products built for outcomes" now follows the hero, with DEO Suite beside ProVision AI.
 - Typography: no weight above medium (500) anywhere; body and heading text set to near-black.

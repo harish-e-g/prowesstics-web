@@ -99,24 +99,17 @@ p{margin:0}
 .vert.v1{top:48px;right:max(24px, env(safe-area-inset-right, 0px))}
 .vert.v2{bottom:40px;right:max(24px, env(safe-area-inset-right, 0px))}
 @media (max-width:1399px){.vert{display:none}}
-/* Laptop screens with less height (most Windows laptops at 125-150% scaling: 1280x720, 1366x768, 1536x864):
-   scale the hero by height so the headline, buttons and the 10 all fit above the stats bar. */
-@media (min-width:961px) and (max-height:920px){
-  .hero .wrap{padding-block:40px 48px}
-  .hero h1{font-size:clamp(2.6rem,min(6vw,8.4vh),4.9rem);margin-top:18px}
-  .hero .lede{margin-top:16px;font-size:clamp(1rem,min(1.6vw,2.3vh),1.22rem)}
-  .hero-cta{margin-top:26px}
-  .ten-svg{width:clamp(210px,min(25vw,40vh),350px)}
-}
+
 
 /* STATS */
 .stats{background:#fff;box-shadow:0 18px 40px -30px rgba(10,31,68,.35);position:relative;z-index:3}
 .stats .wrap{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding-block:26px}
-@media (max-width:1180px){.stats .wrap{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:22px}}
+@media (max-width:960px){.stats .wrap{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:22px}}
 @media (max-width:560px){.stats .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .st{display:flex;align-items:center;gap:14px;padding:6px 18px;border-right:1px solid var(--line);min-width:0}
 .st:last-child{border-right:0}
-@media (max-width:1180px){.st{border-right:0}}
+@media (max-width:960px){.st{border-right:0}}
+@media (min-width:961px) and (max-width:1180px){.st{padding:6px 10px;gap:10px}.st svg{width:28px;height:28px}}
 .st svg{flex:none;color:var(--ink)}
 .st-t{display:grid;gap:2px;min-width:0}
 .st b{font-size:clamp(1.6rem,2.3vw,2rem);line-height:1.1;font-weight:500;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -431,3 +424,19 @@ html,body{margin:0}
 .prod .ph{height:auto;aspect-ratio:2400/1340}
 .prod .ph:not(.filled){aspect-ratio:auto;height:190px}
 .cta .ph.filled{height:auto;aspect-ratio:2400/1340}
+
+/* Desktop and laptop: size the hero from the visible browser height, so the hero and the white stats
+   bar always fit in the first screen, from short Windows laptop viewports (about 1265x550 at 150% scaling)
+   up to large monitors. Width still caps every size. */
+@media (min-width:961px){
+  .hero .wrap{padding-block:clamp(16px,4.2vh,56px) clamp(20px,5vh,72px)}
+  .kick-rule{margin-top:clamp(8px,1.6vh,14px)}
+  .hero h1{font-size:clamp(2rem,min(6vw,7.1vh),4.9rem);margin-top:clamp(8px,2.2vh,22px)}
+  .hero .lede{margin-top:clamp(8px,2vh,20px);font-size:clamp(.95rem,min(1.6vw,2.5vh),1.28rem)}
+  .hero-cta{margin-top:clamp(12px,3vh,34px)}
+  .hero-cta .btn{padding-block:clamp(10px,1.8vh,15px)}
+  .play .ring{width:clamp(42px,6.5vh,56px);height:clamp(42px,6.5vh,56px)}
+  .ten-svg{width:clamp(170px,min(25vw,42vh),350px)}
+  .stats .wrap{padding-block:clamp(10px,2.6vh,26px)}
+  .st b{font-size:clamp(1.35rem,min(2.3vw,4.4vh),2rem)}
+}
