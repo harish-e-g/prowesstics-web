@@ -40,8 +40,8 @@ export default function Nav() {
   return (
     <header className="nav">
       <div className="wrap">
-        <Link className="logo" href="/" aria-label="Prowesstics home">
-          <Image src="/brand/wordmark.png" alt="Prowesstics" width={229} height={30} priority />
+        <Link className="logo" href="/" aria-label="Home">
+          <Image src="/brand/wordmark.png" alt="Company wordmark" width={229} height={30} priority />
         </Link>
         <ul>
           {nav.map((n) => (

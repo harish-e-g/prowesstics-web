@@ -1,14 +1,14 @@
-# Prowesstics website: working rules for Claude Code
+# Corporate website: working rules for Claude Code
 
 Claude Code reads this file automatically at the start of every session. It holds the
 standing rules so no session depends on chat history.
 
 ## Owner and ways of working
-- Owner: Harish E G (Head of Sales and Marketing, APAC and EMEA, Prowesstics).
+- Owner: Harish E G (Head of Sales and Marketing, APAC and EMEA).
 - Commit and push every finished change without asking. Be professional in version control.
 - When Harish asks for a correction, change only what he names. Leave everything else as is.
 - Give step-by-step, plain-English explanations. Keep replies short.
-- Never mention Singapore in Prowesstics-facing content.
+- Never mention Singapore in company-facing content.
 
 ## Git conventions
 - Author: `Harish E G <harishesakkiyappan@gmail.com>`.

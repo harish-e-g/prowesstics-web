@@ -1,12 +1,15 @@
 # Changelog
 
-All notable changes to the Prowesstics website are recorded here.
+All notable changes to the corporate website are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- Removed the retired company name from copy, titles, alt text, docs and tooling in favour of neutral wording. URLs, the sales email, the repository name and the deploy base path are unchanged.
+
 ### Added
-- Hero film: "See How We Create Impact" now plays the 2-minute Smart Assembly and Packing Line film (factory automation and traceability, music and voiceover), rebranded to Prowesstics with frame-matched logo replacement (`public/video/`, `tools/video/`).
+- Hero film: "See How We Create Impact" now plays the 2-minute Smart Assembly and Packing Line film (factory automation and traceability, music and voiceover), rebranded with frame-matched logo replacement (`public/video/`, `tools/video/`).
 - 10-year mark: original glass-ring design restored, now animated for the tenth anniversary: the 1 rises, the ring turns into place, the gold rim draws in, then orbits slowly (passing behind the 1) with a glowing lead, a light sweep crosses both numerals, the halo breathes and soft gold sparkles twinkle. CSS transform and opacity only; reduced motion shows the still design.
 - Stats bar: 200+ Team Members added (six figures), plus numberOfEmployees in the Organization structured data.
 - Services and Solutions drop-down menus in the top bar, plus a mobile menu.

@@ -1,4 +1,4 @@
-"""Universal edit of the Smart Assembly film: Prowesstics logos, no client name anywhere on screen,
+"""Universal edit of the Smart Assembly film: company logos, no client name anywhere on screen,
 universal subtitle and end line. Output video only (audio handled afterwards)."""
 import cv2, numpy as np, json, subprocess, sys
 from textfx import remove_text, draw_text
@@ -105,7 +105,7 @@ while True:
             m=np.zeros((100,320),np.uint8); m[18:78,40:280]=255; f[940:1040,800:1120]=cv2.inpaint(f[940:1040,800:1120],m,9,cv2.INPAINT_TELEA)
         if TA[i]>0.01: inpaint_fixed(f,SUBBOX,SUBM,min(1,TA[i]*1.6))
         if i in ENG: erase_engraving(f,ENG[i])
-        if i in LAB: replace_label(f,LAB[i],"PROWESSTICS",(58,52,46),SEMI)
+        if i in LAB: replace_label(f,LAB[i],"AUTOMATION",(58,52,46),SEMI)
         if i in JKF: replace_label(f,JKF[i],"PRW",(240,236,230),MED,light=False)
         if EA[i]>0.01: inpaint_fixed(f,ENDBOX,ENDM,min(1,EA[i]*1.6))
         for k in ("title","end","bug"):

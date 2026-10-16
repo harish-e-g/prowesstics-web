@@ -14,8 +14,8 @@ const nunito = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Prowesstics | Data Engineering, AI & Factory Automation",
-    template: "%s | Prowesstics",
+    default: "Data Engineering, AI & Factory Automation",
+    template: "%s",
   },
   description: site.description,
   keywords: [
@@ -28,11 +28,11 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: "Prowesstics | Data. People. Real Business Impact.",
+    title: "Data. People. Real Business Impact.",
     description: site.description,
-    images: [{ url: "/brand/wordmark.png", width: 1600, height: 210, alt: "Prowesstics" }],
+    images: [{ url: "/brand/wordmark.png", width: 1600, height: 210, alt: "Company wordmark" }],
   },
-  twitter: { card: "summary_large_image", title: "Prowesstics", description: site.description },
+  twitter: { card: "summary_large_image", title: "Data Engineering, AI & Factory Automation", description: site.description },
   robots: { index: true, follow: true },
 };
 

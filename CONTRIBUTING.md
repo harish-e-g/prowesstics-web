@@ -1,6 +1,6 @@
 # Contributing
 
-This is a private repository for the Prowesstics corporate website. These rules keep every change reviewable and the live site stable.
+This is a private repository for the corporate website. These rules keep every change reviewable and the live site stable.
 
 ## Branches
 | Branch | Purpose |

@@ -5,9 +5,9 @@ Fill these in on GitHub once the repository exists. Each value is ready to paste
 ## About (gear icon on the repository home page)
 | Field | Value |
 |---|---|
-| Description | Official corporate website of Prowesstics IT Services: data engineering, AI, computer vision and factory automation. Next.js 15, React 19, TypeScript. |
+| Description | Official corporate website of IT Services: data engineering, AI, computer vision and factory automation. Next.js 15, React 19, TypeScript. |
 | Website | https://www.prowesstics.com |
-| Topics | `nextjs` `react` `typescript` `corporate-website` `data-engineering` `artificial-intelligence` `computer-vision` `factory-automation` `machine-learning` `business-intelligence` `prowesstics` |
+| Topics | `nextjs` `react` `typescript` `corporate-website` `data-engineering` `artificial-intelligence` `computer-vision` `factory-automation` `machine-learning` `business-intelligence` |
 | Include in home page | Releases: on. Packages: off. Deployments: on. |
 
 ## General

@@ -20,9 +20,9 @@ python3 tools/visuals/make_industries.py IND-05   # one slot
 ```
 
 ## Source photos
-Place the untouched source photos in `tools/visuals/src/` (not committed; they are kept in the Prowesstics image archive `Prowesstics_Website_Images_Realistic_Batch02/gamma_batch03`). Expected names: `GAMMA_IND-01.jpg` to `GAMMA_IND-09.jpg`, `GAMMA_IMG-11.jpg`, `GAMMA_IMG-13.jpg` to `GAMMA_IMG-15.jpg`, `GAMMA_IMG-12_DEO.jpg`, `SRC_IMG-10.png`, and the service cut-outs `IMG-02.png` to `IMG-09.png`.
+Place the untouched source photos in `tools/visuals/src/` (not committed; they are kept in the image archive `Website_Images_Realistic_Batch02/gamma_batch03`). Expected names: `GAMMA_IND-01.jpg` to `GAMMA_IND-09.jpg`, `GAMMA_IMG-11.jpg`, `GAMMA_IMG-13.jpg` to `GAMMA_IMG-15.jpg`, `GAMMA_IMG-12_DEO.jpg`, `SRC_IMG-10.png`, and the service cut-outs `IMG-02.png` to `IMG-09.png`.
 
 ## Rules
 - Every overlay carries the note "Illustrative visualisation".
-- Numbers that describe Prowesstics results must come from case studies or collateral; operational readouts (counts, IDs, timestamps) are illustrative examples.
+- Numbers that describe company results must come from case studies or collateral; operational readouts (counts, IDs, timestamps) are illustrative examples.
 - Keep two versions of each product image: a card version with three or four large callouts, and a `-detail.jpg` with the full technical overlay that opens in the lightbox.

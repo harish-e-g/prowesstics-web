@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="public/brand/wordmark.png" alt="Prowesstics" width="360">
+  <img src="public/brand/wordmark.png" alt="Company wordmark" width="360">
 </p>
 
 <h3 align="center">Trusted Data. Working AI. Real Business Impact.</h3>
 
 <p align="center">
-  Official corporate website of <strong>Prowesstics IT Services Pvt. Ltd.</strong><br>
+  Official corporate website of <strong>IT Services Pvt. Ltd.</strong><br>
   Data engineering, AI and advanced analytics, computer vision and full factory automation for enterprises across India, Europe and the United States.
 </p>
 
@@ -45,7 +45,7 @@
 
 | Item | Detail |
 |---|---|
-| Organisation | Prowesstics IT Services Pvt. Ltd. |
+| Organisation | IT Services Pvt. Ltd. |
 | Founded | 2017 |
 | Locations | Plano (USA) and Chennai (India) delivery centre |
 | Website | https://www.prowesstics.com |
@@ -55,7 +55,7 @@
 | Project owner | Harish E G, Head of Sales and Marketing (APAC and EMEA) |
 | Build | Next.js App Router, static by default, deployable to Vercel |
 
-The site positions Prowesstics as one partner across three capability layers:
+The site positions the company as one partner across three capability layers:
 
 - **Data:** data engineering, cloud migration, data warehousing and data quality
 - **Intelligence:** AI, machine learning, generative and agentic AI, predictive analytics and BI
@@ -106,7 +106,7 @@ prowesstics-web/
 │   ├── layout.tsx          Root layout: font, metadata, Open Graph, viewport
 │   ├── page.tsx            Homepage section order and Organization structured data
 │   ├── globals.css         Design tokens and all component styles
-│   ├── icon.png            Favicon (Prowesstics mark)
+│   ├── icon.png            Favicon (company mark)
 │   ├── robots.ts           Generates /robots.txt
 │   └── sitemap.ts          Generates /sitemap.xml
 ├── components/
@@ -126,7 +126,7 @@ prowesstics-web/
 │   ├── site.ts             All copy and data: hero, stats, services, industries, products, clients, results, tech stack, testimonials
 │   └── images.ts           Image slot register (IMG-01 to IMG-16, IND-01 to IND-09) and company film path
 ├── public/
-│   ├── brand/              Prowesstics wordmark and mark
+│   ├── brand/              Wordmark and mark
 │   ├── logos/              Client logos (transparent PNG)
 │   ├── tech/               Technology logos (transparent PNG)
 │   └── images/             Website photography and technical visuals
@@ -301,7 +301,7 @@ The form in `components/Contact.tsx` validates name and work email and confirms 
 
 ## 16. Ownership, licence and contact
 
-Copyright © 2026 Prowesstics IT Services Pvt. Ltd. All rights reserved. This repository is proprietary; see [LICENSE](LICENSE).
+Copyright © 2026 IT Services Pvt. Ltd. All rights reserved. This repository is proprietary; see [LICENSE](LICENSE).
 
 Client names, logos and testimonials appear with reference to delivered engagements. Third-party technology logos belong to their respective owners and are shown to indicate platform experience only.
 

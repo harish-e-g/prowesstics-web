@@ -84,7 +84,7 @@ export function Commitments() {
   return (
     <section className="sec" style={{ paddingTop: 0 }}>
       <div className="wrap">
-        <Head eyebrow="What you can expect" title="Working with Prowesstics" body="Six commitments every client gets, from the first call to managed operations." />
+        <Head eyebrow="What you can expect" title="Working with us" body="Six commitments every client gets, from the first call to managed operations." />
         <div className="expect">
           {commitments.map((c) => (
             <div className="ex" key={c.title}><span className="num">{c.num}</span><h3>{c.title}</h3><p>{c.body}</p></div>
@@ -147,7 +147,7 @@ export function Clients() {
   return (
     <section className="sec" id="clients" style={{ background: "var(--mist)" }}>
       <div className="wrap">
-        <Head eyebrow="Trusted by" title="Enterprises that run on Prowesstics" body="Manufacturers, lenders, logistics networks and platforms across India, Europe and the United States." />
+        <Head eyebrow="Trusted by" title="Enterprises that trust us" body="Manufacturers, lenders, logistics networks and platforms across India, Europe and the United States." />
       </div>
       <div className="marquee" style={{ ["--dur" as string]: "55s" }}>
         <div className="marquee-track">
