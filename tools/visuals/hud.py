@@ -1,4 +1,4 @@
-"""Shared technical-overlay toolkit for corporate website imagery.
+"""Shared technical-overlay toolkit for Prowesstics website imagery.
 Coordinates are given in 'design units' (the grid image pixels); K scales them to output pixels."""
 import cv2
 import numpy as np

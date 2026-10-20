@@ -1,12 +1,12 @@
 // All homepage copy and data lives here. Edit this file to change text, stats, logos or testimonials.
 
 export const site = {
-  name: "IT Services",
-  legalName: "IT Services Pvt. Ltd.",
+  name: "Prowesstics",
+  legalName: "Prowesstics IT Services Pvt. Ltd.",
   url: "https://www.prowesstics.com",
   email: "sales@prowesstics.com",
   description:
-    "We partner with enterprises to turn data, AI and factory automation into measurable business impact, on the systems and cameras they already own.",
+    "Prowesstics partners with enterprises to turn data, AI and factory automation into measurable business impact, on the systems and cameras they already own.",
   locations: "Plano · Chennai",
   founded: "2017",
 };
@@ -219,14 +219,14 @@ export const tech_ai: Tech[] = [
 ];
 
 export const testimonials: { name: string; role: string; logo?: string; badge?: string; quote: string }[] = [
-  { name: "Grace", role: "Head of Data & Automation, Metsä Group", logo: "/logos/metsa.png", quote: "The data analysts have proven their capability to design powerful analytical reports for the Metsä APAC supply chain. The meaningful insights and ease of visualising the entire supply chain activity have increased our company's work efficiency by 50%." },
-  { name: "Phil Abernathy", role: "CTO, ZING", logo: "/logos/zing.png", quote: "A very big thanks to the team for implementing our Yellowfin analytics solution within ZING. The team ramped up quickly and delivered the reports and visualisations we needed with strong collaboration and high delivery quality throughout our Agile way of working." },
-  { name: "Plant Head", role: "Schwing Stetter India", logo: "/logos/schwing.png", quote: "They replaced a four-hour alignment ritual with a fifteen-minute one. We're taking it to every batch plant we build." },
-  { name: "Leadership Team", role: "K-Indev Ocean (India) Pvt. Ltd.", logo: "/logos/kindev.png", quote: "Bringing seven separate systems under one roof was something we thought would take years. They delivered a working, unified platform that gave us visibility we never had before. The team understood our logistics domain deeply and built something our branch teams actually use every day." },
-  { name: "Data Team", role: "LendingUSA", logo: "/logos/lendingusa.png", quote: "They played a key role in modernising our ETL pipelines and stabilising critical analytics and AML workloads. The team executed the migration efficiently, reduced operational overhead and ensured data accuracy throughout the transition." },
+  { name: "Grace", role: "Head of Data & Automation, Metsä Group", logo: "/logos/metsa.png", quote: "Prowesstics data analysts have proven their capability to design powerful analytical reports for the Metsä APAC supply chain. The meaningful insights and ease of visualising the entire supply chain activity have increased our company's work efficiency by 50%." },
+  { name: "Phil Abernathy", role: "CTO, ZING", logo: "/logos/zing.png", quote: "A very big thanks to the Prowesstics team for implementing our Yellowfin analytics solution within ZING. The team ramped up quickly and delivered the reports and visualisations we needed with strong collaboration and high delivery quality throughout our Agile way of working." },
+  { name: "Plant Head", role: "Schwing Stetter India", logo: "/logos/schwing.png", quote: "Prowesstics replaced a four-hour alignment ritual with a fifteen-minute one. We're taking it to every batch plant we build." },
+  { name: "Leadership Team", role: "K-Indev Ocean (India) Pvt. Ltd.", logo: "/logos/kindev.png", quote: "Bringing seven separate systems under one roof was something we thought would take years. Prowesstics delivered a working, unified platform that gave us visibility we never had before. The team understood our logistics domain deeply and built something our branch teams actually use every day." },
+  { name: "Data Team", role: "LendingUSA", logo: "/logos/lendingusa.png", quote: "Prowesstics played a key role in modernising our ETL pipelines and stabilising critical analytics and AML workloads. The team executed the migration efficiently, reduced operational overhead and ensured data accuracy throughout the transition." },
   { name: "Plant Director", role: "Sujan ContiTech AVS", badge: "Sujan ContiTech", quote: "The Tamil Nadu pilot proved itself in months. We're extending to Pune and Bilaspur, and our global clients have noticed the difference." },
-  { name: "Leadership Team", role: "TripFactory Travel, Bengaluru", logo: "/logos/tripfactory.png", quote: "We had six different systems telling six different stories. They gave us one platform that finally spoke the truth. Our operations team stopped chasing spreadsheets and our leadership started making faster decisions." },
-  { name: "Management Team", role: "WEH, Germany", logo: "/logos/weh.png", quote: "The move from Excel-based reporting to a centralised data and BI platform has significantly improved how our teams access and use information. The team executed the implementation smoothly and provided strong support throughout." },
+  { name: "Leadership Team", role: "TripFactory Travel, Bengaluru", logo: "/logos/tripfactory.png", quote: "We had six different systems telling six different stories. Prowesstics gave us one platform that finally spoke the truth. Our operations team stopped chasing spreadsheets and our leadership started making faster decisions." },
+  { name: "Management Team", role: "WEH, Germany", logo: "/logos/weh.png", quote: "The move from Excel-based reporting to a centralised data and BI platform has significantly improved how our teams access and use information. The Prowesstics team executed the implementation smoothly and provided strong support throughout." },
   { name: "Data & Analytics Team", role: "NIFCO", logo: "/logos/nifco.png", quote: "The Power BI gateway implementation lets us reliably refresh cloud reports from our on-premises Oracle data without manual intervention. It improved reporting consistency, strengthened security controls and gave us better visibility into refresh operations." },
   { name: "Cardiology Provider", role: "United States, name withheld", badge: "US Healthcare", quote: "The need was never just dashboards. It was a consistent, trusted view of healthcare operations across every system." },
 ];

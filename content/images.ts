@@ -7,7 +7,7 @@
 export type Slot = { src?: string; detail?: string; alt: string; cutout?: boolean };
 
 export const images: Record<string, Slot> = {
-  "IMG-01": { src: "/images/IMG-01.jpg", alt: "Leadership team in a boardroom at dusk" },
+  "IMG-01": { src: "/images/IMG-01.jpg", alt: "Prowesstics leadership team in a boardroom at dusk" },
   "IMG-02": { src: "/images/IMG-02.jpg", detail: "/images/IMG-02.jpg", alt: "Data engineers mapping a pipeline architecture beside a live data lineage view" },
   "IMG-03": { src: "/images/IMG-03.jpg", detail: "/images/IMG-03.jpg", alt: "Leadership team reviewing a single KPI dashboard" },
   "IMG-04": { src: "/images/IMG-04.jpg", detail: "/images/IMG-04.jpg", alt: "Cloud engineer tracking a migration wave in a data centre aisle" },
@@ -21,7 +21,7 @@ export const images: Record<string, Slot> = {
   "IMG-12": { src: "/images/IMG-12.jpg", detail: "/images/IMG-12-detail.jpg", alt: "DEO Suite data engineering optimization: engineers reviewing a pipeline DAG and runtime trends" },
   "IMG-13": { src: "/images/IMG-13.jpg", detail: "/images/IMG-13-detail.jpg", alt: "ProSight AI footfall heat map, shopper dwell tracking and out-of-stock alerts in a supermarket" },
   "IMG-14": { src: "/images/IMG-14.jpg", detail: "/images/IMG-14-detail.jpg", alt: "ProTrace AI reading a part code, confirming the variant and logging its full genealogy" },
-  "IMG-15": { src: "/images/IMG-15.jpg", detail: "/images/IMG-15-detail.jpg", alt: "Consultant and plant manager reviewing a two-week pilot" },
+  "IMG-15": { src: "/images/IMG-15.jpg", detail: "/images/IMG-15-detail.jpg", alt: "Prowesstics consultant and plant manager reviewing a two-week pilot" },
   "IMG-16": { alt: "10 years", cutout: true },
   "IND-01": { src: "/images/IND-01.jpg", alt: "Manufacturing: part measurement, PPE check and machine OEE" },
   "IND-02": { src: "/images/IND-02.jpg", alt: "Automotive: weld seam and spot weld verification in the body shop" },

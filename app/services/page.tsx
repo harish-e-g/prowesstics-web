@@ -6,9 +6,9 @@ import Footer from "@/components/Footer";
 import Lightbox from "@/components/Lightbox";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Services | Prowesstics",
   description:
-    "Data engineering, business intelligence, cloud migration, AI and analytics, computer vision, factory automation, managed data operations and staff augmentation from one partner.",
+    "Data engineering, business intelligence, cloud migration, AI and analytics, computer vision, factory automation, managed data operations and staff augmentation from Prowesstics.",
   alternates: { canonical: "/services/" },
 };
 

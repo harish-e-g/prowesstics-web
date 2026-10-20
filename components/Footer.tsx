@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="wrap">
         <div className="fgrid">
           <div>
-            <Image src="/brand/wordmark.png" alt="Company wordmark" width={198} height={26} />
+            <Image src="/brand/wordmark.png" alt="Prowesstics" width={198} height={26} />
             <p>Data engineering, AI and factory automation that deliver measurable business impact.</p>
           </div>
           {footerCols.map((c) => (

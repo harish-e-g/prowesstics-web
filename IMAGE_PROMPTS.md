@@ -1,4 +1,4 @@
-# Website: Photoreal UHD Image Prompts (v3)
+# Prowesstics Website: Photoreal UHD Image Prompts (v3)
 
 Goal: images that look like a real commercial photoshoot, not AI art. Every prompt below is written the way a photographer briefs a shoot: real camera, real lens, real light, real people and real places.
 
@@ -114,7 +114,7 @@ This one is a graphic, not a photo, so it will look rendered by design:
 ---
 
 ## VIDEO-01 · 2 minute company film
-No generation needed. Use **the final HQ movie file** from `42.02.02 ProVision AI / 00 FINAL - Client Ready`.
+No generation needed. Use **ProVision_AI_Movie_Prowesstics_HQ - FINAL.mp4** from `42.02.02 ProVision AI / 00 FINAL - Client Ready`.
 
 ---
 
