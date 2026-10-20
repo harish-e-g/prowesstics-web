@@ -5,6 +5,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+### Changed
+- Restored the company name in copy, titles, alt text, docs and tooling after the owner lifted the naming restriction for this project.
+
 ### Added
 - Hero film: "See How We Create Impact" now plays the 2-minute Smart Assembly and Packing Line film (factory automation and traceability, music and voiceover), rebranded to Prowesstics with frame-matched logo replacement (`public/video/`, `tools/video/`).
 - 10-year mark: original glass-ring design restored, now animated for the tenth anniversary: the 1 rises, the ring turns into place, the gold rim draws in, then orbits slowly (passing behind the 1) with a glowing lead, a light sweep crosses both numerals, the halo breathes and soft gold sparkles twinkle. CSS transform and opacity only; reduced motion shows the still design.
