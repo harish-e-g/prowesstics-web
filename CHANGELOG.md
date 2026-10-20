@@ -6,7 +6,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ## [Unreleased]
 
 ### Changed
-- Site name set to "Data & Automation Partners" (working name, owner to confirm) in structured data and page titles.
 - Removed the retired company name from copy, titles, alt text, docs and tooling in favour of neutral wording. URLs, the sales email, the repository name and the deploy base path are unchanged.
 
 ### Added
