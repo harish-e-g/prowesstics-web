@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: "Data Engineering, AI & Factory Automation",
-    template: "%s",
+    template: "%s | Data & Automation Partners",
   },
   description: site.description,
   keywords: [

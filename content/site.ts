@@ -1,7 +1,7 @@
 // All homepage copy and data lives here. Edit this file to change text, stats, logos or testimonials.
 
 export const site = {
-  name: "IT Services",
+  name: "Data & Automation Partners",
   legalName: "IT Services Pvt. Ltd.",
   url: "https://www.prowesstics.com",
   email: "sales@prowesstics.com",
